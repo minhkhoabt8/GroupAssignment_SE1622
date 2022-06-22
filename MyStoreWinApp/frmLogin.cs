@@ -35,9 +35,11 @@ namespace MyStoreWinApp
                 {
                     //direct to admin page
                     frmMemberManagement frmMemberDetails = new frmMemberManagement();
+                    MessageBox.Show("this is admin page");
                 }
                 else if(memberDetails != null)
                 {
+                    MessageBox.Show("this is user page");
                     //direct to user page
                     frmMemberDetails frmMemberDetails = new frmMemberDetails
                     {

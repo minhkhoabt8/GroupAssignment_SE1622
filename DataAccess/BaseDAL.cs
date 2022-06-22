@@ -6,12 +6,12 @@ namespace DataAccess
 {
     public class BaseDAL
     {
-        public MemberDataProvider dataprovider { get; set; } = null;
+        public MemberDataProvider dataProvider { get; set; } = null;
         public SqlConnection connection = null;
         public BaseDAL()
         {
             var connectionString = GetConnectionString();
-            dataprovider = new MemberDataProvider(connectionString);
+            dataProvider = new MemberDataProvider(connectionString);
         }
 
         public static IConfiguration Configuration;
@@ -26,7 +26,7 @@ namespace DataAccess
             connectionString = config["ConnectionStrings:MemberDB"];
             return connectionString;
         }
-        public void CloseConenction() => dataprovider.CloseConnection(connection);
+        public void CloseConenction() => dataProvider.CloseConnection(connection);
 
 
     }

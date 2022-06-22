@@ -25,28 +25,29 @@ namespace DataAccess
        
 
         //Code Below Here !!!
-        public MemberObject Login(MemberObject member)
+        public MemberObject Login(string email, string password)
         {
-            IDataReader dataReader = null;
+            IDataReader dataReader=null;
+            MemberObject member = null;
             try
             {
                 string sqlQuerry = "Select MemberID, MemberName, Email, Password, City,Country " +
                 "From Members " +
                 "Where Email = @Email And PassWord = @Password ";
                 var parameters = new List<SqlParameter>();
-                parameters.Add(dataprovider.CreateParameter("@Email", 20, member.Email, DbType.String));
-                parameters.Add(dataprovider.CreateParameter("@Password",20, member.Password,DbType.String));
-                var datareader = dataprovider.GetDataReader(sqlQuerry, CommandType.Text,out connection, parameters.ToArray());
-                if (datareader.Read())
+                parameters.Add(dataProvider.CreateParameter("@Email", 20, email, DbType.String));
+                parameters.Add(dataProvider.CreateParameter("@Password",20, password,DbType.String));
+                dataReader = dataProvider.GetDataReader(sqlQuerry, CommandType.Text,out connection, parameters.ToArray());
+                if (dataReader.Read())
                 {
                     member = new MemberObject
                     {
-                        Email = member.Email,
-                        Password = member.Password,
-                        City = member.City,
-                        Country = member.Country,
-                        MemberID = member.MemberID,
-                        MemberName = member.MemberName
+                        Email = dataReader.GetString(2),
+                        Password = dataReader.GetString(3),
+                        City = dataReader.GetString(4),
+                        Country = dataReader.GetString(5),
+                        MemberID = dataReader.GetInt32(0),
+                        MemberName = dataReader.GetString(1)
                     };
                 }
             
@@ -70,8 +71,22 @@ namespace DataAccess
             {
                 string sqlQuerry = "Select MemberID, MemberName, Email, Password, City,Country " +
                 "From Members " +
-                "Where MemberName = @memberName ";
-                 
+                "Where MemberName LIKE @memberName ";
+                
+                    var param = dataProvider.CreateParameter("@memberName",20,searchValue,DbType.String);
+                    dataReader = dataProvider.GetDataReader(sqlQuerry, CommandType.Text, out connection, param);
+                    while (dataReader.Read())
+                    {
+                        resultList.Add(new MemberObject
+                        {
+                            MemberID = dataReader.GetInt32(0),
+                            MemberName = dataReader.GetString(1),
+                            Email = dataReader.GetString(2),
+                            Password = dataReader.GetString(3),
+                            City = dataReader.GetString(4),
+                            Country = dataReader.GetString(5)
+                        });
+                    } 
             }
             catch (Exception ex)
             {
@@ -82,11 +97,7 @@ namespace DataAccess
                 dataReader.Close();
                 CloseConenction();
             }
-            return null;
-
-
-           
-            
+            return resultList;
         }
 
 
