@@ -31,7 +31,7 @@ namespace DataAccess
             MemberObject member = null;
             try
             {
-                string sqlQuerry = "Select MemberID, MemberName, Email, Password, City,Country " +
+                string sqlQuerry = "Select MemberID, MemberName, Email, Password, City, Country " +
                 "From Members " +
                 "Where Email = @Email And PassWord = @Password ";
                 var parameters = new List<SqlParameter>();
@@ -42,12 +42,13 @@ namespace DataAccess
                 {
                     member = new MemberObject
                     {
+                        MemberID = dataReader.GetInt32(0),
+                        MemberName = dataReader.GetString(1),
                         Email = dataReader.GetString(2),
                         Password = dataReader.GetString(3),
                         City = dataReader.GetString(4),
-                        Country = dataReader.GetString(5),
-                        MemberID = dataReader.GetInt32(0),
-                        MemberName = dataReader.GetString(1)
+                        Country = dataReader.GetString(5)
+                        
                     };
                 }
             
