@@ -31,12 +31,12 @@ namespace DataAccess.Repository
 
         public MemberObject Login(string email, string password)
         {
-            throw new NotImplementedException();
+           return MemberDAO.Instance.Login(email, password);
         }
 
         public IList<MemberObject> Search(string searchValue)
         {
-            throw new NotImplementedException();
+            return MemberDAO.Instance.Search(searchValue);
         }
 
         public void UpdateMember(MemberObject member)

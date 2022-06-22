@@ -26,5 +26,15 @@ namespace MyStoreWinApp
         {
 
         }
+
+        private void btn_Save_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btn_Cancel_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
     }
 }

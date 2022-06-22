@@ -32,7 +32,48 @@ namespace DataAccess
         }
 
         //Code Below Here !!!
-
+        public MemberObject Login(string email, string password)
+        {
+            
+            foreach(var member in memberList)
+            {
+                if(member.Email.Equals(email) && member.Password.Equals(password))
+                {
+                    return new MemberObject
+                    {
+                        MemberID = member.MemberID,
+                        MemberName = member.MemberName,
+                        Email = email,
+                        Password = password,
+                        City = member.City,
+                        Country = member.Country,
+                    };
+                }
+            }
+            return null;
+        }
+        public IList<MemberObject> Search(string searchValue)
+        {
+            var list = new List<MemberObject>();
+            foreach (var member in memberList)
+            {
+                if (searchValue.Contains(member.Email) 
+                    || searchValue.Contains(member.MemberID.ToString()) 
+                    || searchValue.Contains(member.MemberName.ToLower()))
+                {
+                    list.Add(new MemberObject
+                    {
+                        MemberID = member.MemberID,
+                        MemberName = member.MemberName,
+                        Email = member.Email,
+                        Password = member.Password,
+                        City = member.City,
+                        Country = member.Country
+                    });
+                }
+            }
+            return list;
+        }
 
 
     }
