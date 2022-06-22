@@ -21,12 +21,12 @@ namespace DataAccess.Repository
 
         public IList<MemberObject> GetMembers()
         {
-            throw new NotImplementedException();
+            return MemberDAO.Instance.GetMemberList();
         }
 
         public void InsertMember(MemberObject member)
         {
-            throw new NotImplementedException();
+            MemberDAO.Instance.InsertMember(member);
         }
 
         public MemberObject Login(string email, string password)

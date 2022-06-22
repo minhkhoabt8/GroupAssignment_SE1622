@@ -75,6 +75,24 @@ namespace DataAccess
             return list;
         }
 
+        public void InsertMember(MemberObject member)
+        {
+            //Waiting for GetMemberByID function
+            memberList.Add(member);
+            //MemberObject checkMember = GetMemberByID(member.MemberID);
+            //if(checkMember == null)
+            //{
+            //    memberList.Add(member);
+            //}
+            //else
+            //{
+            //    throw new Exception("Member is already exists");
+            //}
+        }
 
+        public IList<MemberObject> GetMemberList()
+        {
+            return memberList;
+        }
     }
 }
