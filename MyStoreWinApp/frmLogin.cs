@@ -1,4 +1,5 @@
 using BusinessObject;
+using DataAccess;
 using DataAccess.Repository;
 using Microsoft.Extensions.Configuration;
 using System;
@@ -26,9 +27,10 @@ namespace MyStoreWinApp
             try
             {
                 //retrieves the account object from the DefaultEmail section of the Configuration.
-                var systemAccount = Program.Configuration.GetSection("DefaultEmail").Get<account>();
+                var systemAccount = new ConfigurationBuilder().AddJsonFile("appsettings.json").Build().GetSection("DefaultEmail").Get<Account>();
+                //var systemAccount1 = Program.Configuration.GetSection("DefaultEmail").Get<Account>();
                 var memberDetails = memberRepository.Login(txt_Email.Text, txt_Password.Text);
-                
+                //MessageBox.Show(connectionString);
                 if(txt_Email.Text.Equals(systemAccount.Email) && txt_Password.Text.Equals(systemAccount.Password))
                 {
                     //direct to admin page
@@ -69,7 +71,7 @@ namespace MyStoreWinApp
 
         }
 
-        public class account
+        public class Account
         {
             public string Email { get; set; }
             public string Password { get; set; }

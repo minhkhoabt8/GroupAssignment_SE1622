@@ -93,5 +93,20 @@ namespace MyStoreWinApp
         {
 
         }
+
+        private void btn_FilterByCountry_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btn_FilterByCity_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btn_SortByName_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

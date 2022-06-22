@@ -18,12 +18,8 @@ namespace MyStoreWinApp
         {
             // To customize application configuration such as set high DPI settings or default font,
             // see https://aka.ms/applicationconfiguration.
-            var builder = new ConfigurationBuilder()
-                        .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true);
-            Configuration = builder.Build();
-           
             ApplicationConfiguration.Initialize();
-            Application.Run(new frmMemberManagement());
+            Application.Run(new frmLogin());
         }
     }
 }

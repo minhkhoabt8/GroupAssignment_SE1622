@@ -1,21 +1,12 @@
 ﻿using BusinessObject;
+using System.Data;
+using System.Data.SqlClient;
 
 namespace DataAccess
 {
-    public class MemberDAO
+    public class MemberDAO : BaseDAL
     {
-        //Don't Modify This Code !!!
-        private static IList<MemberObject> memberList = new List<MemberObject>()
-        {
-            // Email" : "admin@fstore.com",
-            //Password" : "admin@@"
-            new MemberObject{MemberID = 1, MemberName = "Khoa", Email = "khoa@gmail.com", Password = "admin", City = "HCM", Country = "VietNam"},
-            new MemberObject{MemberID = 2, MemberName = "Phong", Email = "phong@gmail.com", Password = "admin", City = "HCM", Country = "VietNam"},
-            new MemberObject{MemberID = 3, MemberName = "Cuong", Email = "cuong@gmail.com", Password = "admin", City = "HCM", Country = "VietNam"},
-            new MemberObject{MemberID = 4, MemberName = "Quyen", Email = "quyen@gmail.com", Password = "admin", City = "HCM", Country = "VietNam"},
-            new MemberObject{MemberID = 5, MemberName = "Thanh", Email = "thanh@gmail.com", Password = "admin", City = "HCM", Country = "VietNam"}
-            //Info is not delete if new object the same id
-        };
+        
         private static MemberDAO instance = null;
         private static readonly object instanceLock = new object();
         private MemberDAO() { }
@@ -31,48 +22,71 @@ namespace DataAccess
             }
         }
 
+       
+
         //Code Below Here !!!
-        public MemberObject Login(string email, string password)
+        public MemberObject Login(MemberObject member)
         {
-            
-            foreach(var member in memberList)
+            IDataReader dataReader = null;
+            try
             {
-                if(member.Email.Equals(email) && member.Password.Equals(password))
+                string sqlQuerry = "Select MemberID, MemberName, Email, Password, City,Country " +
+                "From Members " +
+                "Where Email = @Email And PassWord = @Password ";
+                var parameters = new List<SqlParameter>();
+                parameters.Add(dataprovider.CreateParameter("@Email", 20, member.Email, DbType.String));
+                parameters.Add(dataprovider.CreateParameter("@Password",20, member.Password,DbType.String));
+                var datareader = dataprovider.GetDataReader(sqlQuerry, CommandType.Text,out connection, parameters.ToArray());
+                if (datareader.Read())
                 {
-                    return new MemberObject
+                    member = new MemberObject
                     {
-                        MemberID = member.MemberID,
-                        MemberName = member.MemberName,
-                        Email = email,
-                        Password = password,
-                        City = member.City,
-                        Country = member.Country,
-                    };
-                }
-            }
-            return null;
-        }
-        public IList<MemberObject> Search(string searchValue)
-        {
-            var list = new List<MemberObject>();
-            foreach (var member in memberList)
-            {
-                if (searchValue.Contains(member.Email) 
-                    || searchValue.Contains(member.MemberID.ToString()) 
-                    || searchValue.Contains(member.MemberName.ToLower()))
-                {
-                    list.Add(new MemberObject
-                    {
-                        MemberID = member.MemberID,
-                        MemberName = member.MemberName,
                         Email = member.Email,
                         Password = member.Password,
                         City = member.City,
-                        Country = member.Country
-                    });
+                        Country = member.Country,
+                        MemberID = member.MemberID,
+                        MemberName = member.MemberName
+                    };
                 }
+            
             }
-            return list;
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                dataReader.Close();
+                CloseConenction();
+            }
+            return member;
+        }
+        public IList<MemberObject> Search(string searchValue)
+        {
+            IDataReader dataReader = null;
+            var  resultList = new List<MemberObject>(); 
+            try
+            {
+                string sqlQuerry = "Select MemberID, MemberName, Email, Password, City,Country " +
+                "From Members " +
+                "Where MemberName = @memberName ";
+                 
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                dataReader.Close();
+                CloseConenction();
+            }
+            return null;
+
+
+           
+            
         }
 
 

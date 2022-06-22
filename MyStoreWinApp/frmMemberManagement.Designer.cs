@@ -48,6 +48,9 @@
             this.lb_Country = new System.Windows.Forms.Label();
             this.lb_Password = new System.Windows.Forms.Label();
             this.lb_MemberID = new System.Windows.Forms.Label();
+            this.btn_FilterByCountry = new System.Windows.Forms.Button();
+            this.btn_FilterByCity = new System.Windows.Forms.Button();
+            this.btn_SortByName = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_MemberList)).BeginInit();
             this.SuspendLayout();
             // 
@@ -79,7 +82,7 @@
             // 
             // btnClose
             // 
-            this.btnClose.Location = new System.Drawing.Point(665, 498);
+            this.btnClose.Location = new System.Drawing.Point(21, 458);
             this.btnClose.Name = "btnClose";
             this.btnClose.Size = new System.Drawing.Size(94, 29);
             this.btnClose.TabIndex = 46;
@@ -101,7 +104,7 @@
             // 
             // btn_Delete
             // 
-            this.btn_Delete.Location = new System.Drawing.Point(933, 439);
+            this.btn_Delete.Location = new System.Drawing.Point(656, 463);
             this.btn_Delete.Name = "btn_Delete";
             this.btn_Delete.Size = new System.Drawing.Size(94, 29);
             this.btn_Delete.TabIndex = 44;
@@ -111,7 +114,7 @@
             // 
             // btn_New
             // 
-            this.btn_New.Location = new System.Drawing.Point(665, 439);
+            this.btn_New.Location = new System.Drawing.Point(933, 458);
             this.btn_New.Name = "btn_New";
             this.btn_New.Size = new System.Drawing.Size(94, 29);
             this.btn_New.TabIndex = 43;
@@ -121,7 +124,7 @@
             // 
             // btn_Load
             // 
-            this.btn_Load.Location = new System.Drawing.Point(344, 439);
+            this.btn_Load.Location = new System.Drawing.Point(364, 458);
             this.btn_Load.Name = "btn_Load";
             this.btn_Load.Size = new System.Drawing.Size(94, 29);
             this.btn_Load.TabIndex = 42;
@@ -227,11 +230,44 @@
             this.lb_MemberID.TabIndex = 30;
             this.lb_MemberID.Text = "MemberID";
             // 
+            // btn_FilterByCountry
+            // 
+            this.btn_FilterByCountry.Location = new System.Drawing.Point(364, 407);
+            this.btn_FilterByCountry.Name = "btn_FilterByCountry";
+            this.btn_FilterByCountry.Size = new System.Drawing.Size(135, 29);
+            this.btn_FilterByCountry.TabIndex = 50;
+            this.btn_FilterByCountry.Text = "Filter By Country";
+            this.btn_FilterByCountry.UseVisualStyleBackColor = true;
+            this.btn_FilterByCountry.Click += new System.EventHandler(this.btn_FilterByCountry_Click);
+            // 
+            // btn_FilterByCity
+            // 
+            this.btn_FilterByCity.Location = new System.Drawing.Point(624, 407);
+            this.btn_FilterByCity.Name = "btn_FilterByCity";
+            this.btn_FilterByCity.Size = new System.Drawing.Size(135, 29);
+            this.btn_FilterByCity.TabIndex = 51;
+            this.btn_FilterByCity.Text = "Filter By City";
+            this.btn_FilterByCity.UseVisualStyleBackColor = true;
+            this.btn_FilterByCity.Click += new System.EventHandler(this.btn_FilterByCity_Click);
+            // 
+            // btn_SortByName
+            // 
+            this.btn_SortByName.Location = new System.Drawing.Point(892, 407);
+            this.btn_SortByName.Name = "btn_SortByName";
+            this.btn_SortByName.Size = new System.Drawing.Size(135, 29);
+            this.btn_SortByName.TabIndex = 52;
+            this.btn_SortByName.Text = "Sort By Name";
+            this.btn_SortByName.UseVisualStyleBackColor = true;
+            this.btn_SortByName.Click += new System.EventHandler(this.btn_SortByName_Click);
+            // 
             // frmMemberManagement
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1048, 539);
+            this.Controls.Add(this.btn_SortByName);
+            this.Controls.Add(this.btn_FilterByCity);
+            this.Controls.Add(this.btn_FilterByCountry);
             this.Controls.Add(this.btn_Search);
             this.Controls.Add(this.txt_SearchValue);
             this.Controls.Add(this.lb_Search);
@@ -283,5 +319,8 @@
         private Label lb_Country;
         private Label lb_Password;
         private Label lb_MemberID;
+        private Button btn_FilterByCountry;
+        private Button btn_FilterByCity;
+        private Button btn_SortByName;
     }
 }
