@@ -63,7 +63,14 @@ namespace MyStoreWinApp
                 }
                 else
                 {
-                    errorProviderEmail.SetError(txt_Email, "");
+                    if (MemberRepository.CheckDuplicateEmail(txt_Email.Text.Trim().ToLower()))
+                    {
+                        errorProviderEmail.SetError(txt_Email, "Your email has been existed!");
+                        validation = false;
+                    }
+                    else {
+                        errorProviderEmail.SetError(txt_Email, "");
+                    }
                 }
             }
             if (txt_Password.Text.Trim().Length == 0)
@@ -101,7 +108,7 @@ namespace MyStoreWinApp
                     {
                         MemberID = int.Parse(txt_MemberID.Text),
                         MemberName = txt_MemberName.Text.Trim(),
-                        Email = txt_Email.Text.Trim(),
+                        Email = txt_Email.Text.Trim().ToLower(),
                         Password = txt_Password.Text.Trim(),
                         City = txt_City.Text.Trim(),
                         Country = txt_Country.Text.Trim()

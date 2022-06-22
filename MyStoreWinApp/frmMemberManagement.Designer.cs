@@ -32,7 +32,6 @@
             this.txt_SearchValue = new System.Windows.Forms.TextBox();
             this.lb_Search = new System.Windows.Forms.Label();
             this.btnClose = new System.Windows.Forms.Button();
-            this.dgv_MemberList = new System.Windows.Forms.DataGridView();
             this.btn_Delete = new System.Windows.Forms.Button();
             this.btn_New = new System.Windows.Forms.Button();
             this.btn_Load = new System.Windows.Forms.Button();
@@ -48,6 +47,8 @@
             this.lb_Country = new System.Windows.Forms.Label();
             this.lb_Password = new System.Windows.Forms.Label();
             this.lb_MemberID = new System.Windows.Forms.Label();
+            this.dgv_MemberList = new System.Windows.Forms.DataGridView();
+            this.cboCountry = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_MemberList)).BeginInit();
             this.SuspendLayout();
             // 
@@ -86,18 +87,6 @@
             this.btnClose.Text = "Close";
             this.btnClose.UseVisualStyleBackColor = true;
             this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
-            // 
-            // dgv_MemberList
-            // 
-            this.dgv_MemberList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgv_MemberList.Location = new System.Drawing.Point(364, 94);
-            this.dgv_MemberList.Name = "dgv_MemberList";
-            this.dgv_MemberList.ReadOnly = true;
-            this.dgv_MemberList.RowHeadersWidth = 51;
-            this.dgv_MemberList.RowTemplate.Height = 29;
-            this.dgv_MemberList.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgv_MemberList.Size = new System.Drawing.Size(663, 307);
-            this.dgv_MemberList.TabIndex = 45;
             // 
             // btn_Delete
             // 
@@ -227,16 +216,40 @@
             this.lb_MemberID.TabIndex = 30;
             this.lb_MemberID.Text = "MemberID";
             // 
+            // dgv_MemberList
+            // 
+            this.dgv_MemberList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgv_MemberList.Location = new System.Drawing.Point(391, 100);
+            this.dgv_MemberList.Name = "dgv_MemberList";
+            this.dgv_MemberList.RowHeadersWidth = 51;
+            this.dgv_MemberList.RowTemplate.Height = 29;
+            this.dgv_MemberList.Size = new System.Drawing.Size(636, 315);
+            this.dgv_MemberList.TabIndex = 50;
+            // 
+            // cboCountry
+            // 
+            this.cboCountry.FormattingEnabled = true;
+            this.cboCountry.Items.AddRange(new object[] {
+            "VietNam",
+            "Indo",
+            "Russia"});
+            this.cboCountry.Location = new System.Drawing.Point(147, 440);
+            this.cboCountry.Name = "cboCountry";
+            this.cboCountry.Size = new System.Drawing.Size(151, 28);
+            this.cboCountry.TabIndex = 51;
+            this.cboCountry.TextChanged += new System.EventHandler(this.cboCountry_TextChanged);
+            // 
             // frmMemberManagement
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1048, 539);
+            this.Controls.Add(this.cboCountry);
+            this.Controls.Add(this.dgv_MemberList);
             this.Controls.Add(this.btn_Search);
             this.Controls.Add(this.txt_SearchValue);
             this.Controls.Add(this.lb_Search);
             this.Controls.Add(this.btnClose);
-            this.Controls.Add(this.dgv_MemberList);
             this.Controls.Add(this.btn_Delete);
             this.Controls.Add(this.btn_New);
             this.Controls.Add(this.btn_Load);
@@ -267,7 +280,6 @@
         private TextBox txt_SearchValue;
         private Label lb_Search;
         private Button btnClose;
-        private DataGridView dgv_MemberList;
         private Button btn_Delete;
         private Button btn_New;
         private Button btn_Load;
@@ -283,5 +295,7 @@
         private Label lb_Country;
         private Label lb_Password;
         private Label lb_MemberID;
+        private DataGridView dgv_MemberList;
+        private ComboBox cboCountry;
     }
 }

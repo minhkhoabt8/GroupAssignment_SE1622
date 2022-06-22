@@ -43,5 +43,14 @@ namespace DataAccess.Repository
         {
             throw new NotImplementedException();
         }
+         public IList<MemberObject> FilterByCountry(string countryValue)
+        {
+            return MemberDAO.Instance.FilterByCountry(countryValue);
+        }
+
+        public bool CheckDuplicateEmail(string email)
+        {
+            return MemberDAO.Instance.CheckDuplicateEmail(email);
+        }
     }
 }
