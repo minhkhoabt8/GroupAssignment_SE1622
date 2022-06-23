@@ -101,6 +101,39 @@ namespace DataAccess
             return resultList;
         }
 
+        public IList<MemberObject> GetMember()
+        {
+            IDataReader dataReader = null;
+            var resultList = new List<MemberObject>();
+            string SQLSelect = "Select MemberID, MemberName, Email, Password, City, Country " +
+                "from Members";
+            try
+            {
+                dataReader = dataProvider.GetDataReader(SQLSelect, CommandType.Text, out connection);
+                while (dataReader.Read())
+                {
+                    resultList.Add(new MemberObject
+                    {
+                        MemberID = dataReader.GetInt32(0),
+                        MemberName = dataReader.GetString(1),
+                        Email = dataReader.GetString(2),
+                        Password = dataReader.GetString(3),
+                        City = dataReader.GetString(4),
+                        Country = dataReader.GetString(5)
+                    });
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                dataReader.Close();
+                CloseConenction();
+            }
+            return resultList;
+        }
 
     }
 }
