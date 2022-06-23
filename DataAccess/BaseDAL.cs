@@ -26,7 +26,7 @@ namespace DataAccess
             connectionString = config["ConnectionStrings:MemberDB"];
             return connectionString;
         }
-        public void CloseConenction() => dataProvider.CloseConnection(connection);
+        public void CloseConnection() => dataProvider.CloseConnection(connection);
 
 
     }
