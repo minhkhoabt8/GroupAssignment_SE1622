@@ -10,6 +10,7 @@ namespace DataAccess.Repository
     public interface IMemberRepository
     {
         public IList<MemberObject> GetMembers();
+        public IList<MemberObject> GetMembersSortByMemberName();
         public MemberObject GetMemberByID(int memberID);
         public void InsertMember(MemberObject member);
         public void DeleteMember(int memberID);
