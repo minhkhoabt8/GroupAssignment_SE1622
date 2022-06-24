@@ -41,7 +41,7 @@ namespace DataAccess.Repository
 
         public void UpdateMember(MemberObject member)
         {
-            throw new NotImplementedException();
+            MemberDAO.Instance.Update(member);
         }
     }
 }
