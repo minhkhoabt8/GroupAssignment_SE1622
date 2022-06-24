@@ -27,77 +27,77 @@ namespace DataAccess
         //Code Below Here !!!
         public MemberObject Login(string email, string password)
         {
-            IDataReader dataReader=null;
-            MemberObject member = null;
             try
             {
-                string sqlQuerry = "Select MemberID, MemberName, Email, Password, City, Country " +
-                "From Members " +
-                "Where Email = @Email And PassWord = @Password ";
-                var parameters = new List<SqlParameter>();
-                parameters.Add(dataProvider.CreateParameter("@Email", 20, email, DbType.String));
-                parameters.Add(dataProvider.CreateParameter("@Password",20, password,DbType.String));
-                dataReader = dataProvider.GetDataReader(sqlQuerry, CommandType.Text,out connection, parameters.ToArray());
-                if (dataReader.Read())
+                DataSet ds = new DataSet();
+                ds = GetData();
+
+                if (ds != null)
                 {
-                    member = new MemberObject
+                    var users = ds.Tables["Members"].AsEnumerable()
+                        .Where(mem => mem.Field<string>("Email") == email && mem.Field<string>("Password") == password)
+                                    .Select(mem => new MemberObject
+                                    {
+                                        MemberID = mem.Field<int>("MemberID"),
+                                        MemberName = mem.Field<string>("MemberName"),
+                                        Email = mem.Field<string>("Email"),
+                                        Password = mem.Field<string>("Password"),
+                                        City = mem.Field<string>("City"),
+                                        Country = mem.Field<string>("Country")
+                                    });
+                    if (users.Any())
                     {
-                        MemberID = dataReader.GetInt32(0),
-                        MemberName = dataReader.GetString(1),
-                        Email = dataReader.GetString(2),
-                        Password = dataReader.GetString(3),
-                        City = dataReader.GetString(4),
-                        Country = dataReader.GetString(5)
-                        
-                    };
+                        foreach (var user in users)
+                        {
+
+                            return user;
+                        }
+                    }
                 }
-            
             }
             catch (Exception ex)
             {
                 throw new Exception(ex.Message);
             }
-            finally
-            {
-                dataReader.Close();
-                CloseConenction();
-            }
-            return member;
+
+            return null;
         }
         public IList<MemberObject> Search(string searchValue)
         {
-            IDataReader dataReader = null;
             var  resultList = new List<MemberObject>(); 
             try
             {
-                string sqlQuerry = "Select MemberID, MemberName, Email, Password, City,Country " +
-                "From Members " +
-                "Where MemberName LIKE @memberName ";
+                DataSet ds = new DataSet();
+                ds = GetData();
+                var searchResults = ds.Tables["Members"].AsEnumerable()
+                    .Where
+                    (sr => sr.Field<string>("Email").Contains(searchValue.ToLower())
+                    || sr.Field<string>("MemberName").Contains(searchValue.ToLower()));
                 
-                    var param = dataProvider.CreateParameter("@memberName",20,searchValue,DbType.String);
-                    dataReader = dataProvider.GetDataReader(sqlQuerry, CommandType.Text, out connection, param);
-                    while (dataReader.Read())
+                if (searchValue.Length > 0)
+                {
+                   foreach(var mem in searchResults)
                     {
-                        resultList.Add(new MemberObject
-                        {
-                            MemberID = dataReader.GetInt32(0),
-                            MemberName = dataReader.GetString(1),
-                            Email = dataReader.GetString(2),
-                            Password = dataReader.GetString(3),
-                            City = dataReader.GetString(4),
-                            Country = dataReader.GetString(5)
-                        });
-                    } 
+                         resultList.Add(new MemberObject
+                         {
+                            MemberID = mem.Field<int>("MemberID"),
+                            MemberName = mem.Field<string>("MemberName"),
+                            Email = mem.Field<string>("Email"),
+                            Password = mem.Field<string>("Password"),
+                            City = mem.Field<string>("City"),
+                            Country = mem.Field<string>("Country")
+                         });
+                        
+                    }
+                }
+
+                
             }
             catch (Exception ex)
             {
                 throw new Exception(ex.Message);
             }
-            finally
-            {
-                dataReader.Close();
-                CloseConenction();
-            }
+            
             return resultList;
         }
 
