@@ -6,7 +6,7 @@ namespace DataAccess
 {
     public class MemberDAO : BaseDAL
     {
-        
+
         private static MemberDAO instance = null;
         private static readonly object instanceLock = new object();
         private MemberDAO() { }
@@ -22,12 +22,12 @@ namespace DataAccess
             }
         }
 
-       
+
 
         //Code Below Here !!!
         public MemberObject Login(string email, string password)
         {
-            IDataReader dataReader=null;
+            IDataReader dataReader = null;
             MemberObject member = null;
             try
             {
@@ -36,8 +36,8 @@ namespace DataAccess
                 "Where Email = @Email And PassWord = @Password ";
                 var parameters = new List<SqlParameter>();
                 parameters.Add(dataProvider.CreateParameter("@Email", 20, email, DbType.String));
-                parameters.Add(dataProvider.CreateParameter("@Password",20, password,DbType.String));
-                dataReader = dataProvider.GetDataReader(sqlQuerry, CommandType.Text,out connection, parameters.ToArray());
+                parameters.Add(dataProvider.CreateParameter("@Password", 20, password, DbType.String));
+                dataReader = dataProvider.GetDataReader(sqlQuerry, CommandType.Text, out connection, parameters.ToArray());
                 if (dataReader.Read())
                 {
                     member = new MemberObject
@@ -48,10 +48,10 @@ namespace DataAccess
                         Password = dataReader.GetString(3),
                         City = dataReader.GetString(4),
                         Country = dataReader.GetString(5)
-                        
+
                     };
                 }
-            
+
             }
             catch (Exception ex)
             {
@@ -67,27 +67,27 @@ namespace DataAccess
         public IList<MemberObject> Search(string searchValue)
         {
             IDataReader dataReader = null;
-            var  resultList = new List<MemberObject>(); 
+            var resultList = new List<MemberObject>();
             try
             {
                 string sqlQuerry = "Select MemberID, MemberName, Email, Password, City,Country " +
                 "From Members " +
                 "Where MemberName LIKE @memberName ";
-                
-                    var param = dataProvider.CreateParameter("@memberName",20,searchValue,DbType.String);
-                    dataReader = dataProvider.GetDataReader(sqlQuerry, CommandType.Text, out connection, param);
-                    while (dataReader.Read())
+
+                var param = dataProvider.CreateParameter("@memberName", 20, searchValue, DbType.String);
+                dataReader = dataProvider.GetDataReader(sqlQuerry, CommandType.Text, out connection, param);
+                while (dataReader.Read())
+                {
+                    resultList.Add(new MemberObject
                     {
-                        resultList.Add(new MemberObject
-                        {
-                            MemberID = dataReader.GetInt32(0),
-                            MemberName = dataReader.GetString(1),
-                            Email = dataReader.GetString(2),
-                            Password = dataReader.GetString(3),
-                            City = dataReader.GetString(4),
-                            Country = dataReader.GetString(5)
-                        });
-                    } 
+                        MemberID = dataReader.GetInt32(0),
+                        MemberName = dataReader.GetString(1),
+                        Email = dataReader.GetString(2),
+                        Password = dataReader.GetString(3),
+                        City = dataReader.GetString(4),
+                        Country = dataReader.GetString(5)
+                    });
+                }
             }
             catch (Exception ex)
             {
@@ -100,7 +100,38 @@ namespace DataAccess
             }
             return resultList;
         }
+        public void Update(MemberObject member)
+        {
+            try
+            {
+                MemberObject m = GetMemberByID(member.MemberID);
+                if (m != null)
+                {
+                    string SQLUpdate = "Update Members set MemberName =@MemberName, Email =@Email,Password=@Password,City=@City,Country=@Country";
+                    var param = new List<SqlParameter>();
+                    param.Add(dataProvider.CreateParameter("@MemberID", 4, member.MemberID, DbType.Int32));
+                    param.Add(dataProvider.CreateParameter("@Email", 4, member.Email, DbType.String));
+                    param.Add(dataProvider.CreateParameter("@Password", 4, member.Password, DbType.String));
+                    param.Add(dataProvider.CreateParameter("@City", 4, member.City, DbType.String));
+                    param.Add(dataProvider.CreateParameter("@Country", 4, member.Country, DbType.String));
+                    dataProvider.Update(SQLUpdate, CommandType.Text, param.ToArray());
 
+
+                }
+                else
+                {
+                    throw new Exception("The member does not already exist");
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                CloseConenction();
+            }
+        }
 
     }
 }
