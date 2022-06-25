@@ -289,7 +289,6 @@
             this.Controls.Add(this.lb_Password);
             this.Controls.Add(this.lb_MemberID);
             this.Name = "frmMemberManagement";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "frmMemberManagement";
             this.Load += new System.EventHandler(this.frmMemberManagement_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgv_MemberList)).EndInit();

@@ -103,7 +103,6 @@
             this.Controls.Add(this.btn_Exit);
             this.Controls.Add(this.btn_Login);
             this.Name = "frmLogin";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Login Form";
             this.Load += new System.EventHandler(this.frmLogin_Load);
             this.ResumeLayout(false);
