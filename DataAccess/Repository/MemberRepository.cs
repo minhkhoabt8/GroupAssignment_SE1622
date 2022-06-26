@@ -23,7 +23,7 @@ namespace DataAccess.Repository
         {
             return MemberDAO.Instance.GetMember();
         }
-
+        
         public void InsertMember(MemberObject member)
         {
             throw new NotImplementedException();
@@ -41,7 +41,12 @@ namespace DataAccess.Repository
 
         public void UpdateMember(MemberObject member)
         {
-            throw new NotImplementedException();
+            MemberDAO.Instance.Update(member);
+        }
+
+        public IList<MemberObject> GetMembersSortByMemberName()
+        {
+            return MemberDAO.Instance.GetMemberSortByMemberName();
         }
     }
 }

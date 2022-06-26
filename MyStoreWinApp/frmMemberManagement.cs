@@ -9,7 +9,6 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using BusinessObject;
-
 namespace MyStoreWinApp
 {
     public partial class frmMemberManagement : Form
@@ -93,48 +92,53 @@ namespace MyStoreWinApp
         private void frmMemberManagement_Load(object sender, EventArgs e)
         {
             btn_Delete.Enabled = false;
-            dgv_MemberList.CellDoubleClick += dgv_MemberList_CellDoubleClick;
+            dgv_MemberList.CellDoubleClick += Dgv_MemberList_CellDoubleClick;
         }
 
-        private void btn_FilterByCountry_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void btn_FilterByCity_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void btn_SortByName_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void dgv_MemberList_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        private void Dgv_MemberList_CellDoubleClick(object? sender, DataGridViewCellEventArgs e)
         {
             frmMemberDetails frmMemberDetails = new frmMemberDetails
             {
-                Text = "Update member",
+                Text = "Update Member",
                 InsertOrUpdate = true,
                 MemberDetails = GetMemberObject(),
                 MemberRepository = memberRepository
+
             };
             if (frmMemberDetails.ShowDialog() == DialogResult.OK)
             {
                 LoadMemberList();
                 source.Position = source.Count - 1;
             }
-               
+
         }
-        
+        private MemberObject GetMemberObject()
+        {
+            MemberObject memberObject = null;
+            try
+            {
+                memberObject = new MemberObject
+                {
+                    MemberID = int.Parse(txt_MemberID.Text),
+                    MemberName = txt_MemberName.Text,
+                    Email = txt_Email.Text,
+                    Password = txt_Password.Text,
+                    City = txt_City.Text,
+                    Country = txt_Country.Text
+                };
+            }catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Get Member");
+            }
+            return memberObject;
+        }
         public void LoadMemberList()
         {
-            var resultList = memberRepository.GetMembers();
+            var members = memberRepository.GetMembers();
             try
             {
                 source = new BindingSource();
-                source.DataSource = resultList;
+                source.DataSource = members;
 
                 txt_MemberID.DataBindings.Clear();
                 txt_MemberName.DataBindings.Clear();
@@ -151,8 +155,8 @@ namespace MyStoreWinApp
                 txt_Country.DataBindings.Add("Text", source, "Country");
 
                 dgv_MemberList.DataSource = null;
-                dgv_MemberList.DataSource = source;
-                if (resultList.Count() == 0)
+                dgv_MemberList.DataSource = members;
+                if (members.Count == 0)
                 {
                     ClearText();
                     btn_Delete.Enabled = false;
@@ -162,29 +166,63 @@ namespace MyStoreWinApp
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Load member list");
+                MessageBox.Show(ex.Message, "Search Noresult for Member");
             }
+
         }
-        private MemberObject GetMemberObject()
+        public void LoadMemberListSortByName()
         {
-            MemberObject memberObject = null;
+            var members = memberRepository.GetMembersSortByMemberName(); 
             try
             {
-                memberObject = new MemberObject
+                source = new BindingSource();
+                source.DataSource = members;
+
+                txt_MemberID.DataBindings.Clear();
+                txt_MemberName.DataBindings.Clear();
+                txt_Email.DataBindings.Clear();
+                txt_City.DataBindings.Clear();
+                txt_Password.DataBindings.Clear();
+                txt_Country.DataBindings.Clear();
+
+                txt_MemberID.DataBindings.Add("Text", source, "MemberID");
+                txt_MemberName.DataBindings.Add("Text", source, "MemberName");
+                txt_Email.DataBindings.Add("Text", source, "Email");
+                txt_Password.DataBindings.Add("Text", source, "Password");
+                txt_City.DataBindings.Add("Text", source, "City");
+                txt_Country.DataBindings.Add("Text", source, "Country");
+
+                dgv_MemberList.DataSource = null;
+                dgv_MemberList.DataSource = members;
+                if (members.Count == 0)
                 {
-                    MemberID = int.Parse(txt_MemberID.Text),
-                    MemberName = txt_MemberName.Text,
-                    Email = txt_Email.Text, 
-                    Password = txt_Password.Text,
-                    City = txt_City.Text,
-                    Country = txt_Country.Text
-                };
+                    ClearText();
+                    btn_Delete.Enabled = false;
+                }
+                else btn_Delete.Enabled = true;
+
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Get car");
+                MessageBox.Show(ex.Message, "Search Noresult for Member");
             }
-            return memberObject;
+
+        }
+
+
+        private void btn_FilterByCountry_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btn_FilterByCity_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btn_SortByName_Click(object sender, EventArgs e)
+        {
+            LoadMemberListSortByName();
         }
     }
 }
