@@ -113,7 +113,11 @@ namespace MyStoreWinApp
         private void frmMemberManagement_Load(object sender, EventArgs e)
         {
             btn_Delete.Enabled = false;
+<<<<<<< Updated upstream
            
+=======
+          
+>>>>>>> Stashed changes
         }
 
         private void Dgv_MemberList_CellDoubleClick(object? sender, DataGridViewCellEventArgs e)
@@ -133,7 +137,11 @@ namespace MyStoreWinApp
             }
 
         }
+<<<<<<< Updated upstream
         
+=======
+       
+>>>>>>> Stashed changes
         public void LoadMemberList()
         {
             var members = memberRepository.GetMembers();
