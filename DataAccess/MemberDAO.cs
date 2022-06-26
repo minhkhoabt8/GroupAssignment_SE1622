@@ -171,7 +171,7 @@ namespace DataAccess
             }
             finally
             {
-                CloseConenction();
+                CloseConnection();
             }
         }
         public IList<MemberObject> GetMemberSortByMemberName()
@@ -203,7 +203,7 @@ namespace DataAccess
             finally
             {
                 dataReader.Close();
-                CloseConenction();
+                CloseConnection();
             }
             return resultList;
         }
