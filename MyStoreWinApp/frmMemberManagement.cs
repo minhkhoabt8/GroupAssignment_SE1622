@@ -1,4 +1,5 @@
-﻿using DataAccess.Repository;
+﻿using BusinessObject;
+using DataAccess.Repository;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -27,11 +28,32 @@ namespace MyStoreWinApp
 
         private void btn_New_Click(object sender, EventArgs e)
         {
-
-        }
+            frmMemberDetails frmMemberDetails = new frmMemberDetails
+            {
+                Text = "Add new member",
+                InsertOrUpdate = false,
+                MemberRepository = memberRepository
+            };
+            if (frmMemberDetails.ShowDialog() == DialogResult.OK)
+            {
+                LoadMemberList();
+                source.Position = source.Count - 1;
+               
+            }
+        }//end btn_New_Click
 
         private void btn_Delete_Click(object sender, EventArgs e)
         {
+            try
+            {
+                var member = GetMemberObject();
+                memberRepository.DeleteMember(member.MemberID);
+                //LoadCarList(); 
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Delete member");
+            }
 
         }
 
@@ -57,8 +79,7 @@ namespace MyStoreWinApp
                 txt_City.DataBindings.Add("Text", source, "City");
                 txt_Country.DataBindings.Add("Text", source, "Country");
 
-                dgv_MemberList.DataSource = null;
-                dgv_MemberList.DataSource = resultList;
+               
                 if (resultList.Count == 0)
                 {
                     ClearText();
@@ -69,7 +90,7 @@ namespace MyStoreWinApp
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message,"Search Noresult for Member");
+                MessageBox.Show(ex.Message, "Search Noresult for Member");
             }
 
         }
@@ -92,7 +113,7 @@ namespace MyStoreWinApp
         private void frmMemberManagement_Load(object sender, EventArgs e)
         {
             btn_Delete.Enabled = false;
-            dgv_MemberList.CellDoubleClick += Dgv_MemberList_CellDoubleClick;
+           
         }
 
         private void Dgv_MemberList_CellDoubleClick(object? sender, DataGridViewCellEventArgs e)
@@ -112,26 +133,7 @@ namespace MyStoreWinApp
             }
 
         }
-        private MemberObject GetMemberObject()
-        {
-            MemberObject memberObject = null;
-            try
-            {
-                memberObject = new MemberObject
-                {
-                    MemberID = int.Parse(txt_MemberID.Text),
-                    MemberName = txt_MemberName.Text,
-                    Email = txt_Email.Text,
-                    Password = txt_Password.Text,
-                    City = txt_City.Text,
-                    Country = txt_Country.Text
-                };
-            }catch(Exception ex)
-            {
-                MessageBox.Show(ex.Message, "Get Member");
-            }
-            return memberObject;
-        }
+        
         public void LoadMemberList()
         {
             var members = memberRepository.GetMembers();
@@ -154,8 +156,7 @@ namespace MyStoreWinApp
                 txt_City.DataBindings.Add("Text", source, "City");
                 txt_Country.DataBindings.Add("Text", source, "Country");
 
-                dgv_MemberList.DataSource = null;
-                dgv_MemberList.DataSource = members;
+                
                 if (members.Count == 0)
                 {
                     ClearText();
@@ -192,8 +193,7 @@ namespace MyStoreWinApp
                 txt_City.DataBindings.Add("Text", source, "City");
                 txt_Country.DataBindings.Add("Text", source, "Country");
 
-                dgv_MemberList.DataSource = null;
-                dgv_MemberList.DataSource = members;
+                
                 if (members.Count == 0)
                 {
                     ClearText();
@@ -223,6 +223,27 @@ namespace MyStoreWinApp
         private void btn_SortByName_Click(object sender, EventArgs e)
         {
             LoadMemberListSortByName();
+        }
+        private MemberObject GetMemberObject()
+        {
+            MemberObject member = null;
+            try
+            {
+                member = new MemberObject
+                {
+                    MemberID = int.Parse(txt_MemberID.Text),
+                    MemberName = txt_MemberName.Text,
+                    Email = txt_Email.Text,
+                    Password = txt_Password.Text,
+                    City = txt_City.Text,
+                    Country = txt_Country.Text,
+                };
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Get Member");
+            }
+            return member;
         }
     }
 }

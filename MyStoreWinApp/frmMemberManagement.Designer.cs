@@ -32,7 +32,6 @@
             this.txt_SearchValue = new System.Windows.Forms.TextBox();
             this.lb_Search = new System.Windows.Forms.Label();
             this.btnClose = new System.Windows.Forms.Button();
-            this.dgv_MemberList = new System.Windows.Forms.DataGridView();
             this.btn_Delete = new System.Windows.Forms.Button();
             this.btn_New = new System.Windows.Forms.Button();
             this.btn_Load = new System.Windows.Forms.Button();
@@ -51,7 +50,7 @@
             this.btn_FilterByCountry = new System.Windows.Forms.Button();
             this.btn_FilterByCity = new System.Windows.Forms.Button();
             this.btn_SortByName = new System.Windows.Forms.Button();
-            ((System.ComponentModel.ISupportInitialize)(this.dgv_MemberList)).BeginInit();
+            
             this.SuspendLayout();
             // 
             // btn_Search
@@ -289,7 +288,6 @@
             this.Controls.Add(this.txt_SearchValue);
             this.Controls.Add(this.lb_Search);
             this.Controls.Add(this.btnClose);
-            this.Controls.Add(this.dgv_MemberList);
             this.Controls.Add(this.btn_Delete);
             this.Controls.Add(this.btn_New);
             this.Controls.Add(this.btn_Load);
@@ -309,7 +307,7 @@
             this.Name = "frmMemberManagement";
             this.Text = "frmMemberManagement";
             this.Load += new System.EventHandler(this.frmMemberManagement_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.dgv_MemberList)).EndInit();
+            
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -321,7 +319,6 @@
         private TextBox txt_SearchValue;
         private Label lb_Search;
         private Button btnClose;
-        private DataGridView dgv_MemberList;
         private Button btn_Delete;
         private Button btn_New;
         private Button btn_Load;
