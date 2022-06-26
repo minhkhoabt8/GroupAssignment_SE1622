@@ -11,12 +11,12 @@ namespace DataAccess.Repository
     {
         public void DeleteMember(int memberID)
         {
-            throw new NotImplementedException();
+            MemberDAO.Instance.DeleteMember(memberID);
         }
 
         public MemberObject GetMemberByID(int memberID)
         {
-            throw new NotImplementedException();
+            return MemberDAO.Instance.GetMemberByID(memberID);
         }
 
         public IList<MemberObject> GetMembers()

@@ -98,6 +98,32 @@ namespace DataAccess
             }
             return member;
         }
+
+        public void DeleteMember(int memberID)
+        {
+            try
+            {
+                MemberObject member = GetMemberByID(memberID);
+                if (member != null)
+                {
+                    string SQLDelete = "Delete Members where MemberID = @MemberID";
+                    var param = dataProvider.CreateParameter("@MemberID", 4, memberID, DbType.Int32);
+                    dataProvider.Delete(SQLDelete, CommandType.Text, param);
+                }
+                else
+                {
+                    throw new Exception("Member does not exist.");
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                CloseConnection();
+            }
+        }
         public IList<MemberObject> Search(string searchValue)
         {
             try
@@ -142,6 +168,44 @@ namespace DataAccess
             
             return null;
         }
+
+
+        public MemberObject GetMemberByID(int memberID)
+        {
+            MemberObject member = null;
+            IDataReader dataReader = null;
+            string SQLSelect = "Select MemberID, MemberName, Email, Password, City, Country " +
+                "from Members where MemberID = @MemberID";
+            try
+            {
+                var param = dataProvider.CreateParameter("@MemberID", 4, memberID, DbType.Int32);
+                dataReader = dataProvider.GetDataReader(SQLSelect, CommandType.Text, out connection, param);
+                if (dataReader.Read())
+                {
+                    member = new MemberObject
+                    {
+                        MemberID = dataReader.GetInt32(0),
+                        MemberName = dataReader.GetString(1),
+                        Email = dataReader.GetString(2),
+                        Password = dataReader.GetString(3),
+                        City = dataReader.GetString(4),
+                        Country = dataReader.GetString(5)
+                    };
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                dataReader.Close();
+                CloseConnection();
+            }
+            return member;
+        }
+
+
         public void Update(MemberObject member)
         {
             try
