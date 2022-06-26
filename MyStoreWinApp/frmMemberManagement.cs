@@ -28,8 +28,19 @@ namespace MyStoreWinApp
 
         private void btn_New_Click(object sender, EventArgs e)
         {
-
-        }
+            frmMemberDetails frmMemberDetails = new frmMemberDetails
+            {
+                Text = "Add new member",
+                InsertOrUpdate = false,
+                MemberRepository = memberRepository
+            };
+            if (frmMemberDetails.ShowDialog() == DialogResult.OK)
+            {
+                LoadMemberList();
+                source.Position = source.Count - 1;
+                cboCountry.Text = String.Empty;
+            }
+        }//end btn_New_Click
 
         private void btn_Delete_Click(object sender, EventArgs e)
         {
@@ -80,7 +91,7 @@ namespace MyStoreWinApp
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message,"Search Noresult for Member");
+                MessageBox.Show(ex.Message, "Search Noresult for Member");
             }
 
         }

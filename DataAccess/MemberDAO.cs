@@ -269,5 +269,58 @@ namespace DataAccess
 
         
 
+        public void InsertMember(MemberObject member)
+        {
+            //Waiting for GetMemberByID function
+            memberList.Add(member);
+            //MemberObject checkMember = GetMemberByID(member.MemberID);
+            //if(checkMember == null)
+            //{
+            //    memberList.Add(member);
+            //}
+            //else
+            //{
+            //    throw new Exception("Member is already exists");
+            //}
+        }
+
+        public IList<MemberObject> GetMemberList()
+        {
+            return memberList;
+        }
+
+        public IList<MemberObject> FilterByCountry(string countryValue)
+        {
+            var membersInCountry = new List<MemberObject>();
+            foreach(var member in memberList)
+            {
+                if (countryValue.Contains(member.Country))
+                {
+                    membersInCountry.Add(new MemberObject
+                    {
+                        MemberID = member.MemberID,
+                        MemberName = member.MemberName,
+                        Email = member.Email,
+                        Password = member.Password,
+                        City = member.City,
+                        Country = member.Country
+                    });
+                }
+            }
+            return membersInCountry;
+        }
+
+        public bool CheckDuplicateEmail(string email)
+        {
+            bool result = false;
+            foreach(MemberObject member in memberList)
+            {
+                if (email.Contains(member.Email))
+                {
+                    result = true;
+                }
+            }
+            return result;
+        }
     }
 }

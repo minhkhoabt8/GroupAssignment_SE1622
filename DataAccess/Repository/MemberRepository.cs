@@ -26,7 +26,7 @@ namespace DataAccess.Repository
         
         public void InsertMember(MemberObject member)
         {
-            throw new NotImplementedException();
+            MemberDAO.Instance.InsertMember(member);
         }
 
         public MemberObject Login(string email, string password)
@@ -47,6 +47,15 @@ namespace DataAccess.Repository
         public IList<MemberObject> GetMembersSortByMemberName()
         {
             return MemberDAO.Instance.GetMemberSortByMemberName();
+        }
+         public IList<MemberObject> FilterByCountry(string countryValue)
+        {
+            return MemberDAO.Instance.FilterByCountry(countryValue);
+        }
+
+        public bool CheckDuplicateEmail(string email)
+        {
+            return MemberDAO.Instance.CheckDuplicateEmail(email);
         }
     }
 }

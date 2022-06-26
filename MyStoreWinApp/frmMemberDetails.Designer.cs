@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.btn_Cancel = new System.Windows.Forms.Button();
             this.btn_Save = new System.Windows.Forms.Button();
             this.txt_Country = new System.Windows.Forms.TextBox();
@@ -42,6 +43,18 @@
             this.label4 = new System.Windows.Forms.Label();
             this.lbCity = new System.Windows.Forms.Label();
             this.lbMemberID = new System.Windows.Forms.Label();
+            this.errorProviderMemberID = new System.Windows.Forms.ErrorProvider(this.components);
+            this.errorProviderMemberName = new System.Windows.Forms.ErrorProvider(this.components);
+            this.errorProviderCity = new System.Windows.Forms.ErrorProvider(this.components);
+            this.errorProviderEmail = new System.Windows.Forms.ErrorProvider(this.components);
+            this.errorProviderPassword = new System.Windows.Forms.ErrorProvider(this.components);
+            this.errorProviderCountry = new System.Windows.Forms.ErrorProvider(this.components);
+            ((System.ComponentModel.ISupportInitialize)(this.errorProviderMemberID)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProviderMemberName)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProviderCity)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProviderEmail)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProviderPassword)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProviderCountry)).BeginInit();
             this.SuspendLayout();
             // 
             // btn_Cancel
@@ -57,6 +70,7 @@
             // 
             // btn_Save
             // 
+            this.btn_Save.DialogResult = System.Windows.Forms.DialogResult.OK;
             this.btn_Save.Location = new System.Drawing.Point(159, 307);
             this.btn_Save.Name = "btn_Save";
             this.btn_Save.Size = new System.Drawing.Size(94, 29);
@@ -162,6 +176,30 @@
             this.lbMemberID.TabIndex = 23;
             this.lbMemberID.Text = "Member ID";
             // 
+            // errorProviderMemberID
+            // 
+            this.errorProviderMemberID.ContainerControl = this;
+            // 
+            // errorProviderMemberName
+            // 
+            this.errorProviderMemberName.ContainerControl = this;
+            // 
+            // errorProviderCity
+            // 
+            this.errorProviderCity.ContainerControl = this;
+            // 
+            // errorProviderEmail
+            // 
+            this.errorProviderEmail.ContainerControl = this;
+            // 
+            // errorProviderPassword
+            // 
+            this.errorProviderPassword.ContainerControl = this;
+            // 
+            // errorProviderCountry
+            // 
+            this.errorProviderCountry.ContainerControl = this;
+            // 
             // frmMemberDetails
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
@@ -184,6 +222,12 @@
             this.Name = "frmMemberDetails";
             this.Text = "Member Details";
             this.Load += new System.EventHandler(this.frmMemberDetails_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.errorProviderMemberID)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProviderMemberName)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProviderCity)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProviderEmail)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProviderPassword)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProviderCountry)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -204,5 +248,11 @@
         private Label label4;
         private Label lbCity;
         private Label lbMemberID;
+        private ErrorProvider errorProviderMemberID;
+        private ErrorProvider errorProviderMemberName;
+        private ErrorProvider errorProviderCity;
+        private ErrorProvider errorProviderEmail;
+        private ErrorProvider errorProviderPassword;
+        private ErrorProvider errorProviderCountry;
     }
 }
