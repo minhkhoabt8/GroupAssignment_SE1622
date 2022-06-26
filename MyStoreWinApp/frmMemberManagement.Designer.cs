@@ -108,6 +108,9 @@
             this.dgv_MemberList.Size = new System.Drawing.Size(580, 230);
             this.dgv_MemberList.TabIndex = 45;
             this.dgv_MemberList.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgv_MemberList_CellDoubleClick);
+<<<<<<< HEAD
+>>>>>>> parent of b82ca54 (Revert "Revert "Fix Some Bug"")
+=======
 >>>>>>> parent of b82ca54 (Revert "Revert "Fix Some Bug"")
             // 
             // btn_Delete
