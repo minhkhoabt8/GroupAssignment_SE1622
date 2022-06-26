@@ -21,7 +21,7 @@ namespace DataAccess.Repository
 
         public IList<MemberObject> GetMembers()
         {
-            throw new NotImplementedException();
+            return MemberDAO.Instance.GetMember();
         }
 
         public void InsertMember(MemberObject member)

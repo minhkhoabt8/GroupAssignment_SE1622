@@ -46,11 +46,13 @@ namespace DataAccess
                     }
                 }
                 reader = command.ExecuteReader();
+               
             }
             catch (Exception ex)
             {
                 throw new Exception(ex.Message);
             }
+            
             return reader;
         }
         public void Delete(string commandText, CommandType commandType,
@@ -69,6 +71,7 @@ namespace DataAccess
                         command.Parameters.Add(param);
                     }
                     command.ExecuteNonQuery();
+                   
                 }
             }
             catch (Exception ex)
@@ -92,6 +95,7 @@ namespace DataAccess
                         command.Parameters.Add(param);
                     }
                     command.ExecuteNonQuery();
+                   
                 }
             }
             catch (Exception ex)
@@ -115,6 +119,7 @@ namespace DataAccess
                         command.Parameters.Add(param);
                     }
                     command.ExecuteNonQuery();
+                    
                 }
             }
             catch (Exception ex)

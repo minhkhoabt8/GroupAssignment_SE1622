@@ -28,14 +28,15 @@ namespace MyStoreWinApp
             {
                 //retrieves the account object from the DefaultEmail section of the Configuration.
                 var systemAccount = new ConfigurationBuilder().AddJsonFile("appsettings.json").Build().GetSection("DefaultEmail").Get<Account>();
-                //var systemAccount1 = Program.Configuration.GetSection("DefaultEmail").Get<Account>();
+               
                 var memberDetails = memberRepository.Login(txt_Email.Text, txt_Password.Text);
-                //MessageBox.Show(connectionString);
+                
                 if(txt_Email.Text.Equals(systemAccount.Email) && txt_Password.Text.Equals(systemAccount.Password))
                 {
                     //direct to admin page
-                    frmMemberManagement frmMemberDetails = new frmMemberManagement();
+                    frmMemberManagement frmMemberManagement = new frmMemberManagement();
                     MessageBox.Show("this is admin page");
+                    frmMemberManagement.Show();
                 }
                 else if(memberDetails != null)
                 {
@@ -48,6 +49,7 @@ namespace MyStoreWinApp
                         MemberDetails = memberDetails,
                         MemberRepository = memberRepository
                     };
+                    frmMemberDetails.Show();
                 }
                 else
                 {
