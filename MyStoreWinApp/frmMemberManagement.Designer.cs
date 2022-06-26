@@ -94,9 +94,6 @@
             // 
             // dgv_MemberList
             // 
-<<<<<<< HEAD
-            
-=======
             this.dgv_MemberList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgv_MemberList.Location = new System.Drawing.Point(318, 70);
             this.dgv_MemberList.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -108,10 +105,6 @@
             this.dgv_MemberList.Size = new System.Drawing.Size(580, 230);
             this.dgv_MemberList.TabIndex = 45;
             this.dgv_MemberList.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgv_MemberList_CellDoubleClick);
-<<<<<<< HEAD
->>>>>>> parent of b82ca54 (Revert "Revert "Fix Some Bug"")
-=======
->>>>>>> parent of b82ca54 (Revert "Revert "Fix Some Bug"")
             // 
             // btn_Delete
             // 
