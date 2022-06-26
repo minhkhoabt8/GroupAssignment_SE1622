@@ -38,7 +38,7 @@ namespace MyStoreWinApp
             {
                 LoadMemberList();
                 source.Position = source.Count - 1;
-                cboCountry.Text = String.Empty;
+               
             }
         }//end btn_New_Click
 
@@ -79,8 +79,7 @@ namespace MyStoreWinApp
                 txt_City.DataBindings.Add("Text", source, "City");
                 txt_Country.DataBindings.Add("Text", source, "Country");
 
-                dgv_MemberList.DataSource = null;
-                dgv_MemberList.DataSource = resultList;
+               
                 if (resultList.Count == 0)
                 {
                     ClearText();
@@ -114,7 +113,7 @@ namespace MyStoreWinApp
         private void frmMemberManagement_Load(object sender, EventArgs e)
         {
             btn_Delete.Enabled = false;
-            dgv_MemberList.CellDoubleClick += Dgv_MemberList_CellDoubleClick;
+           
         }
 
         private void Dgv_MemberList_CellDoubleClick(object? sender, DataGridViewCellEventArgs e)
@@ -157,8 +156,7 @@ namespace MyStoreWinApp
                 txt_City.DataBindings.Add("Text", source, "City");
                 txt_Country.DataBindings.Add("Text", source, "Country");
 
-                dgv_MemberList.DataSource = null;
-                dgv_MemberList.DataSource = members;
+                
                 if (members.Count == 0)
                 {
                     ClearText();
@@ -195,8 +193,7 @@ namespace MyStoreWinApp
                 txt_City.DataBindings.Add("Text", source, "City");
                 txt_Country.DataBindings.Add("Text", source, "Country");
 
-                dgv_MemberList.DataSource = null;
-                dgv_MemberList.DataSource = members;
+                
                 if (members.Count == 0)
                 {
                     ClearText();

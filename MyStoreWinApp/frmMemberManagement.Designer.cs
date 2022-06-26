@@ -50,7 +50,7 @@
             this.btn_FilterByCountry = new System.Windows.Forms.Button();
             this.btn_FilterByCity = new System.Windows.Forms.Button();
             this.btn_SortByName = new System.Windows.Forms.Button();
-            ((System.ComponentModel.ISupportInitialize)(this.dgv_MemberList)).BeginInit();
+            
             this.SuspendLayout();
             // 
             // btn_Search
@@ -94,17 +94,7 @@
             // 
             // dgv_MemberList
             // 
-            this.dgv_MemberList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgv_MemberList.Location = new System.Drawing.Point(318, 70);
-            this.dgv_MemberList.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.dgv_MemberList.Name = "dgv_MemberList";
-            this.dgv_MemberList.ReadOnly = true;
-            this.dgv_MemberList.RowHeadersWidth = 51;
-            this.dgv_MemberList.RowTemplate.Height = 29;
-            this.dgv_MemberList.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgv_MemberList.Size = new System.Drawing.Size(580, 230);
-            this.dgv_MemberList.TabIndex = 45;
-            this.dgv_MemberList.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.Dgv_MemberList_CellDoubleClick);
+            
             // 
             // btn_Delete
             // 
@@ -307,7 +297,7 @@
             this.Name = "frmMemberManagement";
             this.Text = "frmMemberManagement";
             this.Load += new System.EventHandler(this.frmMemberManagement_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.dgv_MemberList)).EndInit();
+            
             this.ResumeLayout(false);
             this.PerformLayout();
 
