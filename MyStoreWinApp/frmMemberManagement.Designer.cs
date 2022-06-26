@@ -94,7 +94,21 @@
             // 
             // dgv_MemberList
             // 
+<<<<<<< HEAD
             
+=======
+            this.dgv_MemberList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgv_MemberList.Location = new System.Drawing.Point(318, 70);
+            this.dgv_MemberList.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.dgv_MemberList.Name = "dgv_MemberList";
+            this.dgv_MemberList.ReadOnly = true;
+            this.dgv_MemberList.RowHeadersWidth = 51;
+            this.dgv_MemberList.RowTemplate.Height = 29;
+            this.dgv_MemberList.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgv_MemberList.Size = new System.Drawing.Size(580, 230);
+            this.dgv_MemberList.TabIndex = 45;
+            this.dgv_MemberList.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgv_MemberList_CellDoubleClick);
+>>>>>>> parent of b82ca54 (Revert "Revert "Fix Some Bug"")
             // 
             // btn_Delete
             // 
