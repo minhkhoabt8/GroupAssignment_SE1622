@@ -11,7 +11,7 @@ namespace DataAccess.Repository
     {
         public void DeleteMember(int memberID)
         {
-            MemberDAO.Instance.DeleteMember(memberID);
+            throw new NotImplementedException();
         }
 
         public MemberObject GetMemberByID(int memberID)
