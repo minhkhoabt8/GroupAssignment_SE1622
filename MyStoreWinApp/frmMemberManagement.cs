@@ -123,26 +123,7 @@ namespace MyStoreWinApp
             }
 
         }
-        private MemberObject GetMemberObject()
-        {
-            MemberObject memberObject = null;
-            try
-            {
-                memberObject = new MemberObject
-                {
-                    MemberID = int.Parse(txt_MemberID.Text),
-                    MemberName = txt_MemberName.Text,
-                    Email = txt_Email.Text,
-                    Password = txt_Password.Text,
-                    City = txt_City.Text,
-                    Country = txt_Country.Text
-                };
-            }catch(Exception ex)
-            {
-                MessageBox.Show(ex.Message, "Get Member");
-            }
-            return memberObject;
-        }
+        
         public void LoadMemberList()
         {
             var members = memberRepository.GetMembers();
@@ -256,5 +237,6 @@ namespace MyStoreWinApp
             }
             return member;
         }
+
     }
 }
