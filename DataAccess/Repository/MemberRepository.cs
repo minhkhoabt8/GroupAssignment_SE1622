@@ -11,22 +11,22 @@ namespace DataAccess.Repository
     {
         public void DeleteMember(int memberID)
         {
-            MemberDAO.Instance.DeleteMember(memberID);
+             throw new NotImplementedException();
         }
 
         public MemberObject GetMemberByID(int memberID)
         {
-            return MemberDAO.Instance.GetMemberByID(memberID);
+            throw new NotImplementedException();
         }
 
         public IList<MemberObject> GetMembers()
         {
-            return MemberDAO.Instance.GetMember();
+            throw new NotImplementedException();
         }
         
         public void InsertMember(MemberObject member)
         {
-            MemberDAO.Instance.InsertMember(member);
+            throw new NotImplementedException();
         }
 
         public MemberObject Login(string email, string password)
@@ -41,21 +41,21 @@ namespace DataAccess.Repository
 
         public void UpdateMember(MemberObject member)
         {
-            MemberDAO.Instance.Update(member);
+            throw new NotImplementedException();
         }
 
-        public IList<MemberObject> GetMembersSortByMemberName()
+            public IList<MemberObject> GetMembersSortByMemberName()
         {
-            return MemberDAO.Instance.GetMemberSortByMemberName();
+            throw new NotImplementedException();
         }
          public IList<MemberObject> FilterByCountry(string countryValue)
         {
-            return MemberDAO.Instance.FilterByCountry(countryValue);
+            throw new NotImplementedException();
         }
 
         public bool CheckDuplicateEmail(string email)
         {
-            return MemberDAO.Instance.CheckDuplicateEmail(email);
+            throw new NotImplementedException();
         }
     }
 }

@@ -46,7 +46,7 @@ namespace MyStoreWinApp
             try
             {
                 var member = GetMemberObject();
-                memberRepository.DeleteMember(member.MemberId);
+                memberRepository.DeleteMember(member.MemberID);
                 LoadMemberList();
             }
             catch (Exception ex)
@@ -124,7 +124,7 @@ namespace MyStoreWinApp
             {
                 member = new MemberObject
                 {
-                    MemberId = int.Parse(txt_MemberID.Text),
+                    MemberID = int.Parse(txt_MemberID.Text),
                     MemberName = txt_MemberName.Text,
                     Email = txt_Email.Text,
                     Password = txt_Password.Text,
