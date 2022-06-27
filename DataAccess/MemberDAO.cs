@@ -42,12 +42,13 @@ namespace DataAccess
                 {
                     member = new MemberObject
                     {
+                        MemberID = dataReader.GetInt32(0),
+                        MemberName = dataReader.GetString(1),
                         Email = dataReader.GetString(2),
                         Password = dataReader.GetString(3),
                         City = dataReader.GetString(4),
-                        Country = dataReader.GetString(5),
-                        MemberID = dataReader.GetInt32(0),
-                        MemberName = dataReader.GetString(1)
+                        Country = dataReader.GetString(5)
+                        
                     };
                 }
             
@@ -73,7 +74,7 @@ namespace DataAccess
                 "From Members " +
                 "Where MemberName LIKE @memberName ";
                 
-                    var param = dataProvider.CreateParameter("@memberName",20,searchValue,DbType.String);
+                    var param = dataProvider.CreateParameter("@memberName",20,searchValue.ToLower(),DbType.String);
                     dataReader = dataProvider.GetDataReader(sqlQuerry, CommandType.Text, out connection, param);
                     while (dataReader.Read())
                     {
@@ -105,7 +106,7 @@ namespace DataAccess
             IDataReader dataReader = null;
             var resultList = new List<MemberObject>();
             string SQLSelect = "Select MemberID, MemberName, Email, Password, City, Country " +
-                "from Members";
+                "from Members ";
             try
             {
                 dataReader = dataProvider.GetDataReader(SQLSelect, CommandType.Text, out connection);
@@ -141,20 +142,22 @@ namespace DataAccess
                 var members = GetMemberByID(member.MemberID);
                 if (members != null)
                 {
-                    string SQLUpdate = "Update Members set MemberName =@MemberName, Email =@Email,Password=@Password,City=@City,Country=@Country";
+                    string SQLUpdate = "Update Members "
+                        + "set MemberName = @MemberName, Email = @Email, Password = @Password, City = @City, Country = @Country "
+                        + "where MemberID = @MemberID ";
                     var param = new List<SqlParameter>();
-                    param.Add(dataProvider.CreateParameter("@MemberID", 4, member.MemberID, DbType.Int32));
-                    param.Add(dataProvider.CreateParameter("@Email", 4, member.Email, DbType.String));
-                    param.Add(dataProvider.CreateParameter("@Password", 4, member.Password, DbType.String));
-                    param.Add(dataProvider.CreateParameter("@City", 4, member.City, DbType.String));
-                    param.Add(dataProvider.CreateParameter("@Country", 4, member.Country, DbType.String));
+                    param.Add(dataProvider.CreateParameter("@MemberID", 20, member.MemberID, DbType.Int32));
+                    param.Add(dataProvider.CreateParameter("@MemberName", 20, member.MemberName, DbType.String));
+                    param.Add(dataProvider.CreateParameter("@Email", 20, member.Email, DbType.String));
+                    param.Add(dataProvider.CreateParameter("@Password", 20, member.Password, DbType.String));
+                    param.Add(dataProvider.CreateParameter("@City", 20, member.City, DbType.String));
+                    param.Add(dataProvider.CreateParameter("@Country", 20, member.Country, DbType.String));
                     dataProvider.Update(SQLUpdate, CommandType.Text, param.ToArray());
-
 
                 }
                 else
                 {
-                    throw new Exception("The member does not already exist");
+                    throw new Exception("The member does not exist");
                 }
             }
             catch (Exception ex)
@@ -176,7 +179,7 @@ namespace DataAccess
                 "from Members where MemberID = @MemberID";
             try
             {
-                var param = dataProvider.CreateParameter("@MemberID", 4, memberID, DbType.Int32);
+                var param = dataProvider.CreateParameter("@MemberID", 20, memberID, DbType.Int32);
                 dataReader = dataProvider.GetDataReader(SQLSelect, CommandType.Text, out connection, param);
                 if (dataReader.Read())
                 {
@@ -243,7 +246,7 @@ namespace DataAccess
                 if (member != null)
                 {
                     string SQLDelete = "Delete Members where MemberID = @MemberID";
-                    var param = dataProvider.CreateParameter("@MemberID", 4, memberID, DbType.Int32);
+                    var param = dataProvider.CreateParameter("@MemberID", 20, memberID, DbType.Int32);
                     dataProvider.Delete(SQLDelete, CommandType.Text, param);
                 }
                 else

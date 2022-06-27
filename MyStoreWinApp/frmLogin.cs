@@ -26,20 +26,24 @@ namespace MyStoreWinApp
             }
             try
             {
-                //retrieves the account object from the DefaultEmail section of the Configuration.
+                base.OnLoad(e);
                 var systemAccount = new ConfigurationBuilder().AddJsonFile("appsettings.json").Build().GetSection("DefaultEmail").Get<Account>();
-                //var systemAccount1 = Program.Configuration.GetSection("DefaultEmail").Get<Account>();
+                
                 var memberDetails = memberRepository.Login(txt_Email.Text, txt_Password.Text);
-                //MessageBox.Show(connectionString);
+               
                 if(txt_Email.Text.Equals(systemAccount.Email) && txt_Password.Text.Equals(systemAccount.Password))
                 {
+
                     //direct to admin page
                     frmMemberManagement frmMemberDetails = new frmMemberManagement();
-                    MessageBox.Show("this is admin page");
+                    if (frmMemberDetails.ShowDialog() == DialogResult.OK)
+                    {
+                        MessageBox.Show("Goodbye! See you again!");
+                    }
                 }
                 else if(memberDetails != null)
                 {
-                    MessageBox.Show("this is user page");
+                    
                     //direct to user page
                     frmMemberDetails frmMemberDetails = new frmMemberDetails
                     {
@@ -48,6 +52,11 @@ namespace MyStoreWinApp
                         MemberDetails = memberDetails,
                         MemberRepository = memberRepository
                     };
+                    if (frmMemberDetails.ShowDialog() == DialogResult.OK)
+                    {
+                        MessageBox.Show("Goodbye! See you again!");
+                    }
+
                 }
                 else
                 {
