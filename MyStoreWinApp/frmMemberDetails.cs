@@ -106,7 +106,7 @@ namespace MyStoreWinApp
                 {
                     var member = new MemberObject
                     {
-                        MemberID = int.Parse(txt_MemberID.Text),
+                        MemberId = int.Parse(txt_MemberID.Text),
                         MemberName = txt_MemberName.Text.Trim(),
                         Email = txt_Email.Text.Trim().ToLower(),
                         Password = txt_Password.Text.Trim(),

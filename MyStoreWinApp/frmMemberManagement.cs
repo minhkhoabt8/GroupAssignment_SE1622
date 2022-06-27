@@ -14,7 +14,7 @@ namespace MyStoreWinApp
     public partial class frmMemberManagement : Form
     {
         IMemberRepository memberRepository = new MemberRepository();
-        BindingSource source;
+        BindingSource source = null;
         public frmMemberManagement()
         {
             InitializeComponent();
@@ -46,8 +46,8 @@ namespace MyStoreWinApp
             try
             {
                 var member = GetMemberObject();
-                memberRepository.DeleteMember(member.MemberID);
-                //LoadCarList(); 
+                memberRepository.DeleteMember(member.MemberId);
+                LoadMemberList();
             }
             catch (Exception ex)
             {
@@ -66,8 +66,8 @@ namespace MyStoreWinApp
                 txt_MemberID.DataBindings.Clear();
                 txt_MemberName.DataBindings.Clear();
                 txt_Email.DataBindings.Clear();
-                txt_City.DataBindings.Clear();
                 txt_Password.DataBindings.Clear();
+                txt_City.DataBindings.Clear();
                 txt_Country.DataBindings.Clear();
 
                 txt_MemberID.DataBindings.Add("Text", source, "MemberID");
@@ -77,7 +77,10 @@ namespace MyStoreWinApp
                 txt_City.DataBindings.Add("Text", source, "City");
                 txt_Country.DataBindings.Add("Text", source, "Country");
 
-               
+
+                dgv_MemberList.DataSource = null;
+                dgv_MemberList.DataSource = source;
+                
                 if (resultList.Count == 0)
                 {
                     ClearText();
@@ -88,7 +91,7 @@ namespace MyStoreWinApp
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Search Noresult for Member");
+                MessageBox.Show(ex.Message, "Search");
             }
 
         }
@@ -121,12 +124,12 @@ namespace MyStoreWinApp
             {
                 member = new MemberObject
                 {
-                    MemberID = int.Parse(txt_MemberID.Text),
+                    MemberId = int.Parse(txt_MemberID.Text),
                     MemberName = txt_MemberName.Text,
                     Email = txt_Email.Text,
                     Password = txt_Password.Text,
                     City = txt_City.Text,
-                    Country = txt_Country.Text,
+                    Country = txt_Country.Text
                 };
             }
             catch (Exception ex)
@@ -174,7 +177,9 @@ namespace MyStoreWinApp
                 txt_City.DataBindings.Add("Text", source, "City");
                 txt_Country.DataBindings.Add("Text", source, "Country");
 
-                
+                dgv_MemberList.DataSource = null;
+                dgv_MemberList.DataSource = source;
+
                 if (members.Count == 0)
                 {
                     ClearText();
@@ -185,7 +190,7 @@ namespace MyStoreWinApp
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Search Noresult for Member");
+                MessageBox.Show(ex.Message, "Load Member List");
             }
 
         }
@@ -222,7 +227,7 @@ namespace MyStoreWinApp
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Search Noresult for Member");
+                MessageBox.Show(ex.Message, "Search No Result for Member");
             }
 
         }
@@ -243,9 +248,6 @@ namespace MyStoreWinApp
             LoadMemberListSortByName();
         }
 
-        private void dgv_MemberList_CellBorderStyleChanged(object sender, EventArgs e)
-        {
-
-        }
+       
     }
 }

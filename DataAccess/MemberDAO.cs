@@ -22,11 +22,11 @@ namespace DataAccess
             }
         }
 
-       
+
         public IList<MemberObject> GetMember()
         {
             IDataReader dataReader = null;
-           
+
             var memberList = new List<MemberObject>();
             string SQLSelect = "Select MemberID, MemberName, Email, Password, City, Country " +
                 "from Members";
@@ -37,7 +37,7 @@ namespace DataAccess
                 {
                     memberList.Add(new MemberObject
                     {
-                        MemberID = dataReader.GetInt32(0),
+                        MemberId = dataReader.GetInt32(0),
                         MemberName = dataReader.GetString(1),
                         Email = dataReader.GetString(2),
                         Password = dataReader.GetString(3),
@@ -50,11 +50,7 @@ namespace DataAccess
             {
                 throw new Exception(ex.Message);
             }
-            finally
-            {
-                dataReader.Close();
-                CloseConnection();
-            }
+            
             return memberList;
         }
         //Code Below Here !!!
@@ -75,15 +71,15 @@ namespace DataAccess
                 {
                     member = new MemberObject
                     {
+                        MemberId = dataReader.GetInt32(0),
+                        MemberName = dataReader.GetString(1),
                         Email = dataReader.GetString(2),
                         Password = dataReader.GetString(3),
                         City = dataReader.GetString(4),
-                        Country = dataReader.GetString(5),
-                        MemberID = dataReader.GetInt32(0),
-                        MemberName = dataReader.GetString(1)
+                        Country = dataReader.GetString(5)
                     };
-                    
-                   
+
+
                 }
 
             }
@@ -91,11 +87,7 @@ namespace DataAccess
             {
                 throw new Exception(ex.Message);
             }
-            finally
-            {
-                dataReader.Close();
-                CloseConnection();
-            }
+           
             return member;
         }
 
@@ -119,57 +111,42 @@ namespace DataAccess
             {
                 throw new Exception(ex.Message);
             }
-            finally
-            {
-                CloseConnection();
-            }
+            
         }
         public IList<MemberObject> Search(string searchValue)
         {
+
+            IDataReader dataReader = null;
+            var resultList = new List<MemberObject>();
             try
             {
-                IDataReader dataReader = null;
-                var resultList = new List<MemberObject>();
-                try
-                {
-                    string sqlQuerry = "Select MemberID, MemberName, Email, Password, City,Country " +
-                    "From Members " +
-                    "Where MemberName LIKE @memberName ";
+                string sqlQuerry = "Select MemberID, MemberName, Email, Password, City, Country " +
+                "From Members " +
+                "Where MemberName LIKE @memberName ";
 
-                    var param = dataProvider.CreateParameter("@memberName", 20, searchValue, DbType.String);
-                    dataReader = dataProvider.GetDataReader(sqlQuerry, CommandType.Text, out connection, param);
-                    while (dataReader.Read())
+                var param = dataProvider.CreateParameter("@memberName", 4, searchValue, DbType.String);
+                dataReader = dataProvider.GetDataReader(sqlQuerry, CommandType.Text, out connection, param);
+                while (dataReader.Read())
+                {
+                    resultList.Add(new MemberObject
                     {
-                        resultList.Add(new MemberObject
-                        {
-                            MemberID = dataReader.GetInt32(0),
-                            MemberName = dataReader.GetString(1),
-                            Email = dataReader.GetString(2),
-                            Password = dataReader.GetString(3),
-                            City = dataReader.GetString(4),
-                            Country = dataReader.GetString(5)
-                        });
-                    }
-                }
-                catch (Exception ex)
-                {
-                    throw new Exception(ex.Message);
-                }
-                finally
-                {
-                    dataReader.Close();
-                    CloseConnection();
+                        MemberId = dataReader.GetInt32(0),
+                        MemberName = dataReader.GetString(1),
+                        Email = dataReader.GetString(2),
+                        Password = dataReader.GetString(3),
+                        City = dataReader.GetString(4),
+                        Country = dataReader.GetString(5)
+                    });
                 }
             }
             catch (Exception ex)
             {
                 throw new Exception(ex.Message);
             }
-            
+           
             return null;
         }
-
-
+    
         public MemberObject GetMemberByID(int memberID)
         {
             MemberObject member = null;
@@ -184,7 +161,7 @@ namespace DataAccess
                 {
                     member = new MemberObject
                     {
-                        MemberID = dataReader.GetInt32(0),
+                        MemberId = dataReader.GetInt32(0),
                         MemberName = dataReader.GetString(1),
                         Email = dataReader.GetString(2),
                         Password = dataReader.GetString(3),
@@ -197,25 +174,20 @@ namespace DataAccess
             {
                 throw new Exception(ex.Message);
             }
-            finally
-            {
-                dataReader.Close();
-                CloseConnection();
-            }
+            
             return member;
         }
-
 
         public void Update(MemberObject member)
         {
             try
             {
-                MemberObject m = GetMemberByID(member.MemberID);
+                MemberObject m = GetMemberByID(member.MemberId);
                 if (m != null)
                 {
-                    string SQLUpdate = "Update Members set MemberName =@MemberName, Email =@Email,Password=@Password,City=@City,Country=@Country";
+                    string SQLUpdate = "Update Members set MemberName =@MemberName, Email =@Email,Password=@Password,City=@City,Country=@Country ";
                     var param = new List<SqlParameter>();
-                    param.Add(dataProvider.CreateParameter("@MemberID", 4, member.MemberID, DbType.Int32));
+                    param.Add(dataProvider.CreateParameter("@MemberID", 4, member.MemberId, DbType.Int32));
                     param.Add(dataProvider.CreateParameter("@Email", 4, member.Email, DbType.String));
                     param.Add(dataProvider.CreateParameter("@Password", 4, member.Password, DbType.String));
                     param.Add(dataProvider.CreateParameter("@City", 4, member.City, DbType.String));
@@ -226,7 +198,7 @@ namespace DataAccess
                 }
                 else
                 {
-                    throw new Exception("The member does not already exist");
+                    throw new Exception("The member does not exist");
                 }
             }
             catch (Exception ex)
@@ -235,6 +207,7 @@ namespace DataAccess
             }
             finally
             {
+                
                 CloseConnection();
             }
         }
@@ -251,7 +224,7 @@ namespace DataAccess
                 {
                     resultList.Add(new MemberObject
                     {
-                        MemberID = dataReader.GetInt32(0),
+                        MemberId = dataReader.GetInt32(0),
                         MemberName = dataReader.GetString(1),
                         Email = dataReader.GetString(2),
                         Password = dataReader.GetString(3),
