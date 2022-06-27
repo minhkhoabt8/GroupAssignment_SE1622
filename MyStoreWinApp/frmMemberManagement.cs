@@ -117,27 +117,7 @@ namespace MyStoreWinApp
             btn_Delete.Enabled = false;
             dgv_MemberList.CellDoubleClick += Dgv_MemberList_CellDoubleClick;
         }
-        private MemberObject GetMemberObject()
-        {
-            MemberObject member = null;
-            try
-            {
-                member = new MemberObject
-                {
-                    MemberID = int.Parse(txt_MemberID.Text),
-                    MemberName = txt_MemberName.Text,
-                    Email = txt_Email.Text,
-                    Password = txt_Password.Text,
-                    City = txt_City.Text,
-                    Country = txt_Country.Text
-                };
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, "Get Member");
-            }
-            return member;
-        }
+
         private void Dgv_MemberList_CellDoubleClick(object? sender, DataGridViewCellEventArgs e)
         {
             frmMemberDetails frmMemberDetails = new frmMemberDetails
@@ -193,6 +173,27 @@ namespace MyStoreWinApp
                 MessageBox.Show(ex.Message, "Load Member List");
             }
 
+        }
+        private MemberObject GetMemberObject()
+        {
+            MemberObject member = null;
+            try
+            {
+                member = new MemberObject
+                {
+                    MemberID = int.Parse(txt_MemberID.Text),
+                    MemberName = txt_MemberName.Text,
+                    Email = txt_Email.Text,
+                    Password = txt_Password.Text,
+                    City = txt_City.Text,
+                    Country = txt_Country.Text
+                };
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Get Member");
+            }
+            return member;
         }
         public void LoadMemberListSortByName()
         {

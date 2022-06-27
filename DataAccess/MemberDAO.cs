@@ -141,13 +141,14 @@ namespace DataAccess
                 var members = GetMemberByID(member.MemberID);
                 if (members != null)
                 {
-                    string SQLUpdate = "Update Members set MemberName =@MemberName, Email =@Email,Password=@Password,City=@City,Country=@Country";
+                    string SQLUpdate = "Update Members set MemberName =@MemberName, Email =@Email,Password=@Password,City=@City,Country=@Country where MemberID=@MemberID";
                     var param = new List<SqlParameter>();
                     param.Add(dataProvider.CreateParameter("@MemberID", 4, member.MemberID, DbType.Int32));
-                    param.Add(dataProvider.CreateParameter("@Email", 4, member.Email, DbType.String));
-                    param.Add(dataProvider.CreateParameter("@Password", 4, member.Password, DbType.String));
-                    param.Add(dataProvider.CreateParameter("@City", 4, member.City, DbType.String));
-                    param.Add(dataProvider.CreateParameter("@Country", 4, member.Country, DbType.String));
+                    param.Add(dataProvider.CreateParameter("@MemberName", 50, member.MemberName, DbType.String));
+                    param.Add(dataProvider.CreateParameter("@Email", 50, member.Email, DbType.String));
+                    param.Add(dataProvider.CreateParameter("@Password", 50, member.Password, DbType.String));
+                    param.Add(dataProvider.CreateParameter("@City", 50, member.City, DbType.String));
+                    param.Add(dataProvider.CreateParameter("@Country", 50, member.Country, DbType.String));
                     dataProvider.Update(SQLUpdate, CommandType.Text, param.ToArray());
 
 
