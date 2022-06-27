@@ -11,13 +11,12 @@ namespace DataAccess.Repository
     {
         public IList<MemberObject> GetMembers();
         public IList<MemberObject> GetMembersSortByMemberName();
-        public MemberObject GetMemberByID(int memberID);
         public void InsertMember(MemberObject member);
-        public bool CheckDuplicateEmail(string email);
         public void DeleteMember(int memberID);
         public void UpdateMember(MemberObject member);
         public IList<MemberObject> Search(string searchValue);
         public MemberObject Login(string email, string password);
         public IList<MemberObject> FilterByCountry(string countryValue);
+        public IList<MemberObject> FilterByCity(string countryValue);
     }
 }

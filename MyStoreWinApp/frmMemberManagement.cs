@@ -216,7 +216,9 @@ namespace MyStoreWinApp
                 txt_City.DataBindings.Add("Text", source, "City");
                 txt_Country.DataBindings.Add("Text", source, "Country");
 
-                
+                dgv_MemberList.DataSource = null;
+                dgv_MemberList.DataSource = source;
+
                 if (members.Count == 0)
                 {
                     ClearText();
