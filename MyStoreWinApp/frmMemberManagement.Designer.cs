@@ -30,7 +30,6 @@
         {
             this.btn_Search = new System.Windows.Forms.Button();
             this.txt_SearchValue = new System.Windows.Forms.TextBox();
-            this.lb_Search = new System.Windows.Forms.Label();
             this.btnClose = new System.Windows.Forms.Button();
             this.btn_Delete = new System.Windows.Forms.Button();
             this.btn_New = new System.Windows.Forms.Button();
@@ -51,12 +50,14 @@
             this.btn_FilterByCity = new System.Windows.Forms.Button();
             this.btn_SortByName = new System.Windows.Forms.Button();
             this.dgv_MemberList = new System.Windows.Forms.DataGridView();
+            this.txt_FilterByCity = new System.Windows.Forms.TextBox();
+            this.txt_FIlterByCountry = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_MemberList)).BeginInit();
             this.SuspendLayout();
             // 
             // btn_Search
             // 
-            this.btn_Search.Location = new System.Drawing.Point(897, 55);
+            this.btn_Search.Location = new System.Drawing.Point(896, 46);
             this.btn_Search.Name = "btn_Search";
             this.btn_Search.Size = new System.Drawing.Size(130, 29);
             this.btn_Search.TabIndex = 49;
@@ -66,19 +67,10 @@
             // 
             // txt_SearchValue
             // 
-            this.txt_SearchValue.Location = new System.Drawing.Point(565, 55);
+            this.txt_SearchValue.Location = new System.Drawing.Point(450, 46);
             this.txt_SearchValue.Name = "txt_SearchValue";
-            this.txt_SearchValue.Size = new System.Drawing.Size(260, 27);
+            this.txt_SearchValue.Size = new System.Drawing.Size(427, 27);
             this.txt_SearchValue.TabIndex = 48;
-            // 
-            // lb_Search
-            // 
-            this.lb_Search.AutoSize = true;
-            this.lb_Search.Location = new System.Drawing.Point(446, 60);
-            this.lb_Search.Name = "lb_Search";
-            this.lb_Search.Size = new System.Drawing.Size(53, 20);
-            this.lb_Search.TabIndex = 47;
-            this.lb_Search.Text = "Search";
             // 
             // btnClose
             // 
@@ -92,7 +84,7 @@
             // 
             // btn_Delete
             // 
-            this.btn_Delete.Location = new System.Drawing.Point(656, 463);
+            this.btn_Delete.Location = new System.Drawing.Point(363, 477);
             this.btn_Delete.Name = "btn_Delete";
             this.btn_Delete.Size = new System.Drawing.Size(94, 29);
             this.btn_Delete.TabIndex = 44;
@@ -102,7 +94,7 @@
             // 
             // btn_New
             // 
-            this.btn_New.Location = new System.Drawing.Point(933, 459);
+            this.btn_New.Location = new System.Drawing.Point(363, 442);
             this.btn_New.Name = "btn_New";
             this.btn_New.Size = new System.Drawing.Size(94, 29);
             this.btn_New.TabIndex = 43;
@@ -112,7 +104,7 @@
             // 
             // btn_Load
             // 
-            this.btn_Load.Location = new System.Drawing.Point(363, 459);
+            this.btn_Load.Location = new System.Drawing.Point(363, 407);
             this.btn_Load.Name = "btn_Load";
             this.btn_Load.Size = new System.Drawing.Size(94, 29);
             this.btn_Load.TabIndex = 42;
@@ -220,7 +212,7 @@
             // 
             // btn_FilterByCountry
             // 
-            this.btn_FilterByCountry.Location = new System.Drawing.Point(363, 407);
+            this.btn_FilterByCountry.Location = new System.Drawing.Point(665, 441);
             this.btn_FilterByCountry.Name = "btn_FilterByCountry";
             this.btn_FilterByCountry.Size = new System.Drawing.Size(135, 29);
             this.btn_FilterByCountry.TabIndex = 50;
@@ -230,7 +222,7 @@
             // 
             // btn_FilterByCity
             // 
-            this.btn_FilterByCity.Location = new System.Drawing.Point(624, 407);
+            this.btn_FilterByCity.Location = new System.Drawing.Point(665, 406);
             this.btn_FilterByCity.Name = "btn_FilterByCity";
             this.btn_FilterByCity.Size = new System.Drawing.Size(135, 29);
             this.btn_FilterByCity.TabIndex = 51;
@@ -240,7 +232,7 @@
             // 
             // btn_SortByName
             // 
-            this.btn_SortByName.Location = new System.Drawing.Point(891, 407);
+            this.btn_SortByName.Location = new System.Drawing.Point(665, 476);
             this.btn_SortByName.Name = "btn_SortByName";
             this.btn_SortByName.Size = new System.Drawing.Size(135, 29);
             this.btn_SortByName.TabIndex = 52;
@@ -259,22 +251,36 @@
             this.dgv_MemberList.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgv_MemberList.Size = new System.Drawing.Size(662, 312);
             this.dgv_MemberList.TabIndex = 45;
-            
             this.dgv_MemberList.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.Dgv_MemberList_CellDoubleClick);
             this.dgv_MemberList.BindingContextChanged += new System.EventHandler(this.btn_Load_Click);
+            // 
+            // txt_FilterByCity
+            // 
+            this.txt_FilterByCity.Location = new System.Drawing.Point(806, 409);
+            this.txt_FilterByCity.Name = "txt_FilterByCity";
+            this.txt_FilterByCity.Size = new System.Drawing.Size(220, 27);
+            this.txt_FilterByCity.TabIndex = 53;
+            // 
+            // txt_FIlterByCountry
+            // 
+            this.txt_FIlterByCountry.Location = new System.Drawing.Point(806, 444);
+            this.txt_FIlterByCountry.Name = "txt_FIlterByCountry";
+            this.txt_FIlterByCountry.Size = new System.Drawing.Size(220, 27);
+            this.txt_FIlterByCountry.TabIndex = 54;
             // 
             // frmMemberManagement
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1048, 539);
+            this.Controls.Add(this.txt_FIlterByCountry);
+            this.Controls.Add(this.txt_FilterByCity);
             this.Controls.Add(this.dgv_MemberList);
             this.Controls.Add(this.btn_SortByName);
             this.Controls.Add(this.btn_FilterByCity);
             this.Controls.Add(this.btn_FilterByCountry);
             this.Controls.Add(this.btn_Search);
             this.Controls.Add(this.txt_SearchValue);
-            this.Controls.Add(this.lb_Search);
             this.Controls.Add(this.btnClose);
             this.Controls.Add(this.btn_Delete);
             this.Controls.Add(this.btn_New);
@@ -304,7 +310,6 @@
 
         private Button btn_Search;
         private TextBox txt_SearchValue;
-        private Label lb_Search;
         private Button btnClose;
         private Button btn_Delete;
         private Button btn_New;
@@ -325,5 +330,7 @@
         private Button btn_FilterByCity;
         private Button btn_SortByName;
         private DataGridView dgv_MemberList;
+        private TextBox txt_FilterByCity;
+        private TextBox txt_FIlterByCountry;
     }
 }
