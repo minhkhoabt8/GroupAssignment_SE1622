@@ -242,7 +242,7 @@ namespace MyStoreWinApp
 
         private void btn_FilterByCity_Click(object sender, EventArgs e)
         {
-            var resultList = memberRepository.Search(txt_FilterByCity.Text);
+            var resultList = memberRepository.FilterByCity(txt_FilterByCity.Text);
             try
             {
                 source = new BindingSource();
