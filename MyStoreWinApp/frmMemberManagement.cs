@@ -242,7 +242,42 @@ namespace MyStoreWinApp
 
         private void btn_FilterByCity_Click(object sender, EventArgs e)
         {
+            var resultList = memberRepository.Search(txt_FilterByCity.Text);
+            try
+            {
+                source = new BindingSource();
+                source.DataSource = resultList;
 
+                txt_MemberID.DataBindings.Clear();
+                txt_MemberName.DataBindings.Clear();
+                txt_Email.DataBindings.Clear();
+                txt_Password.DataBindings.Clear();
+                txt_City.DataBindings.Clear();
+                txt_Country.DataBindings.Clear();
+
+                txt_MemberID.DataBindings.Add("Text", source, "MemberID");
+                txt_MemberName.DataBindings.Add("Text", source, "MemberName");
+                txt_Email.DataBindings.Add("Text", source, "Email");
+                txt_Password.DataBindings.Add("Text", source, "Password");
+                txt_City.DataBindings.Add("Text", source, "City");
+                txt_Country.DataBindings.Add("Text", source, "Country");
+
+
+                dgv_MemberList.DataSource = null;
+                dgv_MemberList.DataSource = source;
+
+                if (resultList.Count == 0)
+                {
+                    ClearText();
+                    btn_Delete.Enabled = false;
+                }
+                else btn_Delete.Enabled = true;
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Filter by City");
+            }
         }
 
         private void btn_SortByName_Click(object sender, EventArgs e)
