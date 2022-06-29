@@ -267,7 +267,26 @@ namespace DataAccess
 
         public IList<MemberObject> FilterByCountry(string countryName)
         {
-            throw new NotImplementedException();
+
+            var membersInCountry = new List<MemberObject>();
+            var resultList = GetMember();
+            foreach (var member in resultList)
+            {
+                if (member.Country.Contains(countryName))
+                {
+                    membersInCountry.Add(new MemberObject
+                    {
+                        MemberID = member.MemberID,
+                        MemberName = member.MemberName,
+                        Email = member.Email,
+                        Password = member.Password,
+                        City = member.City,
+                        Country = member.Country
+                    });
+                }
+            }
+            return membersInCountry;
+
         }
         public IList<MemberObject> FilterByCity(string cityValue)
         {
@@ -305,6 +324,71 @@ namespace DataAccess
             }
             return resultList;
         }
+        public void InsertMember(MemberObject member)
+        {
+
+            try
+            {
+                MemberObject m = GetMemberByID(member.MemberID);
+                if (m == null)
+                {
+                    if (CheckDuplicateEmail(member.Email))
+                    {
+                        throw new Exception("The email already exists.");
+                    }
+                    else
+                    {
+                        string SQLUpdate = "Insert into Members values(@MemberID,@MemberName,@Email, @Password,@City,@Country)";
+                        var param = new List<SqlParameter>();
+                        param.Add(dataProvider.CreateParameter("@MemberID", 4, member.MemberID, DbType.Int32));
+                        param.Add(dataProvider.CreateParameter("@MemberName", 50, member.Email, DbType.String));
+                        param.Add(dataProvider.CreateParameter("@Email", 20, member.Email, DbType.String));
+                        param.Add(dataProvider.CreateParameter("@Password", 20, member.Password, DbType.String));
+                        param.Add(dataProvider.CreateParameter("@City", 10, member.City, DbType.String));
+                        param.Add(dataProvider.CreateParameter("@Country", 10, member.Country, DbType.String));
+                        dataProvider.Insert(SQLUpdate, CommandType.Text, param.ToArray());
+                    }
+                }
+                else
+                {
+                    throw new Exception("The member already exists");
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                CloseConnection();
+            }
+        }
+        public bool CheckDuplicateEmail(string email)
+        {
+            var resultList = GetMember();
+            bool result = false;
+            try
+            {
+                foreach (var member in resultList)
+                {
+                    if (member.Email == email)
+                    {
+                        result = true;
+                        break;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            return result;
+        }
+
+
+
+
+
 
     }
 }
