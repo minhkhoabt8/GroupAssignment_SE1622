@@ -72,7 +72,8 @@ namespace DataAccess
             {
                 string sqlQuerry = "Select MemberID, MemberName, Email, Password, City,Country " +
                 "From Members " +
-                "Where MemberName LIKE @memberName ";
+                "Where MemberName LIKE @memberName";
+                
                 
                     var param = dataProvider.CreateParameter("@memberName",20,searchValue.ToLower(),DbType.String);
                     dataReader = dataProvider.GetDataReader(sqlQuerry, CommandType.Text, out connection, param);

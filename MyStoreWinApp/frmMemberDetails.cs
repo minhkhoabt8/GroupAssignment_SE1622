@@ -53,10 +53,12 @@ namespace MyStoreWinApp
                 if (InsertOrUpdate == false)
                 {
                     MemberRepository.InsertMember(member);
+                    MessageBox.Show("Insert Success !!!");
                 }
                 else
                 {
                     MemberRepository.UpdateMember(member);
+                    MessageBox.Show("Update Success !!!");
                 }
                 
             }
