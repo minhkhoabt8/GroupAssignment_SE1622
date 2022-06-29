@@ -252,7 +252,7 @@
             this.dgv_MemberList.Size = new System.Drawing.Size(662, 312);
             this.dgv_MemberList.TabIndex = 45;
             this.dgv_MemberList.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.Dgv_MemberList_CellDoubleClick);
-            this.dgv_MemberList.BindingContextChanged += new System.EventHandler(this.btn_Load_Click);
+            //this.dgv_MemberList.BindingContextChanged += new System.EventHandler(this.btn_Load_Click);
             // 
             // txt_FilterByCity
             // 

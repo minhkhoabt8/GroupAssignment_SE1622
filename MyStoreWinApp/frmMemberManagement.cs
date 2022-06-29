@@ -20,10 +20,7 @@ namespace MyStoreWinApp
             InitializeComponent();
         }
 
-        private void btn_Load_Click(object sender, EventArgs e)
-        {
-            LoadMemberList();
-        }
+        
 
         private void btn_New_Click(object sender, EventArgs e)
         {
@@ -54,7 +51,10 @@ namespace MyStoreWinApp
                 MessageBox.Show(ex.Message, "Delete member");
             }
         }
-
+        private void btn_Load_Click(object sender, EventArgs e)
+        {
+            LoadMemberList();
+        }
         private void btn_Search_Click(object sender, EventArgs e)
         {
             var resultList = memberRepository.Search(txt_SearchValue.Text);
@@ -114,6 +114,7 @@ namespace MyStoreWinApp
 
         private void frmMemberManagement_Load(object sender, EventArgs e)
         {
+            
             btn_Delete.Enabled = false;
             dgv_MemberList.CellDoubleClick += Dgv_MemberList_CellDoubleClick;
         }

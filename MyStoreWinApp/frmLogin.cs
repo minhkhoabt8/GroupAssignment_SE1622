@@ -35,8 +35,8 @@ namespace MyStoreWinApp
                 {
 
                     //direct to admin page
-                    frmMemberManagement frmMemberDetails = new frmMemberManagement();
-                    if (frmMemberDetails.ShowDialog() == DialogResult.OK)
+                    frmMemberManagement frmMemberManagement = new frmMemberManagement();
+                    if (frmMemberManagement.ShowDialog() == DialogResult.Cancel)
                     {
                         MessageBox.Show("Goodbye! See you again!");
                     }
@@ -52,7 +52,7 @@ namespace MyStoreWinApp
                         MemberDetails = memberDetails,
                         MemberRepository = memberRepository
                     };
-                    if (frmMemberDetails.ShowDialog() == DialogResult.OK)
+                    if (frmMemberDetails.ShowDialog() == DialogResult.Cancel)
                     {
                         MessageBox.Show("Goodbye! See you again!");
                     }
