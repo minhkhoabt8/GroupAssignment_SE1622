@@ -268,9 +268,41 @@ namespace DataAccess
         {
             throw new NotImplementedException();
         }
-        public IList<MemberObject> FilterByCity(string CityName)
+        public IList<MemberObject> FilterByCity(string cityValue)
         {
-            throw new NotImplementedException();
+            IDataReader dataReader = null;
+            var resultList = new List<MemberObject>();
+            try
+            {
+                string sqlQuerry = "Select MemberID, MemberName, Email, Password, City,Country " +
+                "From Members " +
+                "Where City LIKE @city ";
+
+                var param = dataProvider.CreateParameter("@city", 20, cityValue, DbType.String);
+                dataReader = dataProvider.GetDataReader(sqlQuerry, CommandType.Text, out connection, param);
+                while (dataReader.Read())
+                {
+                    resultList.Add(new MemberObject
+                    {
+                        MemberID = dataReader.GetInt32(0),
+                        MemberName = dataReader.GetString(1),
+                        Email = dataReader.GetString(2),
+                        Password = dataReader.GetString(3),
+                        City = dataReader.GetString(4),
+                        Country = dataReader.GetString(5)
+                    });
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                dataReader.Close();
+                CloseConnection();
+            }
+            return resultList;
         }
 
     }

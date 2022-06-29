@@ -17,6 +17,6 @@ namespace DataAccess.Repository
         public IList<MemberObject> Search(string searchValue);
         public MemberObject Login(string email, string password);
         public IList<MemberObject> FilterByCountry(string countryValue);
-        public IList<MemberObject> FilterByCity(string countryValue);
+        public IList<MemberObject> FilterByCity(string cityValue);
     }
 }

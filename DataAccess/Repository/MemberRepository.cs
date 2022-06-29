@@ -48,9 +48,9 @@ namespace DataAccess.Repository
             throw new NotImplementedException();
         }
 
-        public IList<MemberObject> FilterByCity(string countryValue)
+        public IList<MemberObject> FilterByCity(string cityValue)
         {
-            throw new NotImplementedException();
+           return MemberDAO.Instance.FilterByCity(cityValue);
         }
     }
 }
